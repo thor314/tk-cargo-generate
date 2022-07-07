@@ -40,6 +40,10 @@ cargo install cargo-generate
 cargo generate thor314/tmpl [--lib] [-n YOUR_REPO_NAME] 
 ```
 
+## Overkill?
+Yes. But I'd rather have the overkill all-the-features as a reference than to not have them. Save time, do it once is
+the MO.
+
 ## Know a cool tool I don't?
 Cool, drop an issue or a pull request!
 

@@ -16,23 +16,26 @@ env:
 # start 3 jobs in parallel to check lints, tests, formats.
 jobs:
   lint:
-    name: Lint
+    name: Lint Build Test
     runs-on: ubuntu-latest
     steps:
       # sets many `with` env defaults. https://github.com/actions/checkout
     - uses: actions/checkout@v3
       # run shell commands. must have `-`.
-    - run: cargo clippy --verbose
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - run: cargo test --all-features --verbose
-  fmt-check:
-    name: Fmt check
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - run: bash .github/scripts/fmt_toolchain.sh
-    - run: cargo fmt --all -- --check
+    - run: |
+        cargo clippy --verbose
+        cargo test --all-features --verbose
+        bash .github/scripts/fmt_toolchain.sh
+        cargo fmt --all -- --check
+  # test:
+  #   name: Test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v3
+  # fmt-check:
+  #   name: Fmt check
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - run: bash .github/scripts/fmt_toolchain.sh
+  #   - run: cargo fmt --all -- --check
