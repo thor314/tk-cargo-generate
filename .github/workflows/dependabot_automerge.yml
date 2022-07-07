@@ -3,7 +3,7 @@
 # Other note: Most actions that claim to do this are broken, many hour spent here
 # https://github.com/marketplace/actions/github-action-merge-dependabot
 name: automerge
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   automerge:
