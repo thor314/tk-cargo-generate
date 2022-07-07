@@ -6,7 +6,7 @@
 #![allow(dead_code)]
 use anyhow::Result;
 use clap::Parser;
-use error::MyError;
+use utils::error::MyError;
 use validator::{Validate, ValidationError};
 
 mod utils;

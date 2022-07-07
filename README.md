@@ -8,8 +8,8 @@ My "batteries-and-more-included" templates with `cargo-generate`.
 
 ## Current Features:
 - CI on pull-requests: verifies lints, tests, and formatting (lint/test over build)
-- CI with dependabot to update dependencies
-- Automerge dependabot pull requests (this is insecure, but convenient as heck)
+- CI with dependabot to update dependencies. Note that, since the template repo inserts symbols Cargo can't parse, this feature keeps dependencies in generated libraries up to date, but not in the template repo itself.
+- Automerge dependabot pull requests (this is insecure, but convenient as heck, and see above note.)
 - Options for library or binary templates
 - A template `clap` CLI tools
 - Logging with `log` and `env_logger`
