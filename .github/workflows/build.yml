@@ -11,7 +11,7 @@ on:
       - "**.md"
 
 jobs:
-  build:
+  build-lib:
     runs-on: ubuntu-latest
     env:
       PROJECT_NAME: mytemplate
@@ -20,7 +20,9 @@ jobs:
       - uses: cargo-generate/cargo-generate-action@v0.11.0
         with:
           name: ${{ env.PROJECT_NAME }}
-          args: -d tm=bin
+          template: cgen
+          args: -d tm=lib
+          # other: "-d tm=lib"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -31,3 +33,23 @@ jobs:
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
           cargo check
+  # build-bin:
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     PROJECT_NAME: mytemplate
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: cargo-generate/cargo-generate-action@v0.11.0
+  #       with:
+  #         name: ${{ env.PROJECT_NAME }}
+  #         args: -d tm=bin
+  #     - uses: actions-rs/toolchain@v1
+  #       with:
+  #         toolchain: stable
+  #     # we need to move the generated project to a temp folder, away from the template project
+  #     # otherwise `cargo` runs would fail 
+  #     # see https://github.com/rust-lang/cargo/issues/9922
+  #     - run: |
+  #         mv $PROJECT_NAME ${{ runner.temp }}/
+  #         cd ${{ runner.temp }}/$PROJECT_NAME
+  #         cargo check
