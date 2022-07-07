@@ -31,7 +31,7 @@ jobs:
           cd ${{ runner.temp }}/$PROJECT_NAME
           ls
           bash .github/scripts/check_test_fmt.sh
-  check-1bin:
+  check-bin:
     runs-on: ubuntu-latest
     env:
       PROJECT_NAME: mytemplate
