@@ -20,7 +20,7 @@ jobs:
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
-          other: "-d tm=lib"
+          other: "--lib"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
@@ -29,7 +29,7 @@ jobs:
       - run: |
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
-          bash ../../.github/scripts/check_test_fmt.sh
+          bash /.github/scripts/check_test_fmt.sh
   check-bin:
     runs-on: ubuntu-latest
     env:
@@ -40,11 +40,12 @@ jobs:
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
-          other: "-d tm=bin"
+          other: "--bin"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
       - run: |
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
-          bash ../../.github/scripts/check_test_fmt.sh
+          pwd
+          bash $HOME/.github/scripts/check_test_fmt.sh

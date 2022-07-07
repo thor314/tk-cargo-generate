@@ -22,12 +22,7 @@ jobs:
       # sets many `with` env defaults. https://github.com/actions/checkout
     - uses: actions/checkout@v3
       # run shell commands. must have `-`.
-    - run: |
-        
-        cargo clippy --verbose
-        cargo test --all-features --verbose
-        bash .github/scripts/fmt_toolchain.sh
-        cargo fmt --all -- --check
+    - run: bash .github/scripts/check_test_fmt.sh
   # test:
   #   name: Test
   #   runs-on: ubuntu-latest
