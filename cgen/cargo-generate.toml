@@ -1,0 +1,45 @@
+# Ex: https://github.com/cargo-generate/cargo-generate/blob/main/example-templates/placeholders/cargo-generate.toml
+# available by default:
+# -   `{{authors}}` - from your information from Cargo's configuration: `username <email>` or just plain `username`.
+# -   `{{project-name}}` supplied by either passing the `--name` flag to the command or working with the interactive CLI
+# -   `{{crate_name}}` - the snake_case_version of `project-name`
+# -   `{{crate_type}}` either passing the `--bin` or `--lib` flag, contains either `bin` or `lib`, `--bin` is the default
+# -   `{{os-arch}}` contains the current operating system and architecture ex: `linux-x86_64`
+# -   `{{username}}`  borrowed from Cargo's source code, that determines your information from Cargo's configuration.
+# -   `{{within_cargo_project}}` : buggy; `true` if the template is a `Cargo` project: if `Cargo.toml` is present in any parent folder.
+# -   `{{is_init}}` - buggy; reflects value of `--init` flag; `--init`: drop template in place
+
+
+
+[template]
+cargo_generate_version = ">=0.10.0"
+
+# placeholders: https://cargo-generate.github.io/cargo-generate/templates/custom_placeholders.html
+
+# [placeholders.gh-username]
+# type = "string"
+# prompt = "GitHub username (or organization)?"
+# # The username cannot end with a hyphen, too, but
+# # this requirement is not captured by the regex at the moment.
+# regex = "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
+
+# [placeholders.description]
+# type = "string"
+# prompt = "Project description?"
+
+[placeholders.tm]
+prompt = "bin or lib? "
+choices = ["bin", "lib"]
+
+# conditionals: https://cargo-generate.github.io/cargo-generate/templates/conditional.html
+[conditional.'tm == "lib"']
+ignore = [ "src/main.rs", "src/cli.rs", ".env" ]
+
+[conditional.'tm == "bin"']
+ignore = [ "src/lib.rs" ]
+
+# run pre/post scripts with https://rhai.rs/book/
+# [hooks]
+# pre = ["pre-script.rhai"]
+# post = [...]
+# hub create and push
