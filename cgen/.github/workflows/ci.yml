@@ -23,6 +23,7 @@ jobs:
     - uses: actions/checkout@v3
       # run shell commands. must have `-`.
     - run: |
+        
         cargo clippy --verbose
         cargo test --all-features --verbose
         bash .github/scripts/fmt_toolchain.sh
