@@ -29,8 +29,8 @@ jobs:
       - run: |
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
-          bash /.github/scripts/check_test_fmt.sh
-  check-bin:
+          bash .github/scripts/check_test_fmt.sh
+  check-1bin:
     runs-on: ubuntu-latest
     env:
       PROJECT_NAME: mytemplate
@@ -48,4 +48,61 @@ jobs:
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
           pwd
-          bash $HOME/.github/scripts/check_test_fmt.sh
+          bash ../.github/scripts/check_test_fmt.sh
+  check-2bin:
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_NAME: mytemplate
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cargo-generate/cargo-generate-action@v0.11.0
+        with:
+          name: ${{ env.PROJECT_NAME }}
+          template: cgen
+          other: "--bin"
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: |
+          mv $PROJECT_NAME ${{ runner.temp }}/
+          cd ${{ runner.temp }}/$PROJECT_NAME
+          pwd
+          bash ../../.github/scripts/check_test_fmt.sh
+  check-3bin:
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_NAME: mytemplate
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cargo-generate/cargo-generate-action@v0.11.0
+        with:
+          name: ${{ env.PROJECT_NAME }}
+          template: cgen
+          other: "--bin"
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: |
+          mv $PROJECT_NAME ${{ runner.temp }}/
+          cd ${{ runner.temp }}/$PROJECT_NAME
+          pwd
+          bash ../../../.github/scripts/check_test_fmt.sh
+  check-4bin:
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_NAME: mytemplate
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cargo-generate/cargo-generate-action@v0.11.0
+        with:
+          name: ${{ env.PROJECT_NAME }}
+          template: cgen
+          other: "--bin"
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: |
+          mv $PROJECT_NAME ${{ runner.temp }}/
+          cd ${{ runner.temp }}/$PROJECT_NAME
+          pwd
+          bash ../../../../.github/scripts/check_test_fmt.sh
