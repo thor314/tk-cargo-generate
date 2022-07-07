@@ -5,8 +5,8 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum MyError {
-	#[error("My Io error")]
-	Io(#[from] std::io::Error),
-	#[error("an unhandled error")]
-	Unhandled,
+  #[error("My Io error")]
+  Io(#[from] std::io::Error),
+  #[error("an unhandled error")]
+  Unhandled,
 }

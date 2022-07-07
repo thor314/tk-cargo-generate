@@ -1,9 +1,12 @@
 name: Build Template
-on: [pull_request, push]
+on: 
+  pull_request:
     branches: [ 'main' ]
-    # paths-ignore:
-    #   - "**/docs/**"
-    #   - "**.md"
+  push:
+    branches: [ 'main' ]
+  # paths-ignore:
+  #   - "**/docs/**"
+  #   - "**.md"
 
 # Run cargo check on all variants
 jobs:
@@ -22,12 +25,13 @@ jobs:
         with:
           toolchain: stable
       # we need to move the generated project to a temp folder, away from the template project
-      # otherwise `cargo` runs would fail 
-      # see https://github.com/rust-lang/cargo/issues/9922
+      # otherwise `cargo` runs would fail, see https://github.com/rust-lang/cargo/issues/9922
       - run: |
+          bash .github/scripts/fmt_toolchain.sh
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
           cargo check
+          cargo fmt --all -- --check
   check-bin:
     runs-on: ubuntu-latest
     env:
@@ -42,10 +46,9 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      # we need to move the generated project to a temp folder, away from the template project
-      # otherwise `cargo` runs would fail 
-      # see https://github.com/rust-lang/cargo/issues/9922
       - run: |
+          bash .github/scripts/fmt_toolchain.sh
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
           cargo check
+          cargo fmt --all -- --check
