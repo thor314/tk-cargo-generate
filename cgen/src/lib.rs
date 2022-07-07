@@ -5,7 +5,6 @@
 #![allow(dead_code)]
 use anyhow::Result;
 
-mod error;
 mod utils;
 
 #[cfg(test)]

@@ -33,7 +33,7 @@ choices = ["bin", "lib"]
 
 # conditionals: https://cargo-generate.github.io/cargo-generate/templates/conditional.html
 [conditional.'tm == "lib"']
-ignore = [ "src/main.rs", "src/cli.rs", ".env" ]
+ignore = [ "src/main.rs", "src/utils/cli.rs", ".env" ]
 
 [conditional.'tm == "bin"']
 ignore = [ "src/lib.rs" ]
