@@ -22,7 +22,7 @@ My "batteries-and-more-included" templates with `cargo-generate`.
 - Opinionated formatting preferences in `rustfmt.toml`
 - Sensible default `.gitignore` settings
 - Licensing: permissive dual Unlicense/MIT licensing
-- Several optional, common dependencies, that won't be built unless used
+- Several optional common dependencies; won't be built unless used
 
 ## To do:
 More templates:
@@ -36,8 +36,13 @@ Options:
 ## Usage
 ```sh
 cargo install cargo-generate
-cargo generate thor314/cgen --{bin|lib} # bin is default
+# --bin is default
+cargo generate thor314/tmpl [--lib] [-n YOUR_REPO_NAME] 
 ```
+
+## Know a cool tool I don't?
+Cool, drop an issue or a pull request!
 
 ## Alternatives:
 - [rust-github/template](https://github.com/rust-github/template) - a lighter template for `cargo-generate`, with APACHE-MIT dual licensing
+- fork this repo, modify it to your needs, and do it yourself, and maybe submit a pull? (**recommended**)

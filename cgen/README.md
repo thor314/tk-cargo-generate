@@ -1,5 +1,5 @@
 # {{project-name}}
-An experimental play-repo, for my own reference. You probably don't want to copy from here.
+An play repo for my own reference, generated with [my cargo-generate template](github.com/thor314/tmpl). You probably don't want to copy from here.
 
 <!-- [![Crates.io](https://img.shields.io/crates/v/{{project-name}}.svg)](https://crates.io/crates/{{project-name}}) -->
 <!-- [![Docs.rs](https://docs.rs/{{project-name}}/badge.svg)](https://docs.rs/{{project-name}}) -->
