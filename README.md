@@ -26,6 +26,7 @@ My "batteries-and-more-included" templates with `cargo-generate`.
 
 ## To do:
 More templates:
+- Fix bin/lib feature
 - Async template
 - Rocket HTTP server template
 - TUI template, similar to: https://github.com/orhun/rust-tui-template
