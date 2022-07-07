@@ -1,9 +1,9 @@
 name: Build Template
-  on: [pull_request, push]
-    branches: [ 'main' ]
-    # paths-ignore:
-    #   - "**/docs/**"
-    #   - "**.md"
+on: [pull_request, push]
+  branches: [ 'main' ]
+  # paths-ignore:
+  #   - "**/docs/**"
+  #   - "**.md"
 
 # Run cargo check on all variants
 jobs:
