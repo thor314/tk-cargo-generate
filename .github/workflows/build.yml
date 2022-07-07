@@ -47,6 +47,8 @@ jobs:
         with:
           toolchain: stable
       - run: |
+          bash .github/scripts/fmt_toolchain.sh
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
           cargo check
+          cargo fmt --all -- --check
