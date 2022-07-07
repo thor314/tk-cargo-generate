@@ -1,12 +1,10 @@
 # Templates
 My "batteries-and-more-included" templates with `cargo-generate`.
 
-## Why bother with templates? Two reasons:
-- Save time, keep tools organized and close to hand. Countless hours have gone into reducing developer friction.
-  In production, this is called "reproducible builds". In practice, this means making it easy to set up a playground
-  with all your tools.
-- Don't forget (how) to use your tools. A good template puts yours tools in reasonable, unobtrusive places, with short
-  reminders of how to use them, so that you don't have to page through documentation to grab a tool you haven't used in awhile. 
+## Why bother with templates? 
+- Sanity testing is great. Templates like this make it easy to try out new libraries and test features. 
+- Save time setting up tools. Tools are great. I want them available with minimal fiddling.
+- How do I use $TOOL again? Templates remind me how to use my tools, even when I haven't picked them up recently.
 
 ## Current Features:
 - CI on pull-requests: verifies lints, tests, and formatting (lint/test over build)
