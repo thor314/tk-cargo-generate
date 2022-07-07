@@ -6,7 +6,7 @@ information as you feel neccesary.
 This Pull Request fixes/closes #{issue_num}.
 
 It changes the following:
-- `$WHAT_YOU_DID`
+- $WHAT_YOU_DID
 
 I solumnly swear that I included unit tests:
 - [ ] yes sir/ma'am/anon

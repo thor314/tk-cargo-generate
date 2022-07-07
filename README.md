@@ -42,4 +42,4 @@ cargo generate thor314/cgen --{bin|lib}
 ```
 
 ## Alternatives:
-- [[https://github.com/rust-github/template]] - a lighter template for `cargo-generate`, with APACHE-MIT dual licensing
+- [rust-github/template](https://github.com/rust-github/template) - a lighter template for `cargo-generate`, with APACHE-MIT dual licensing
