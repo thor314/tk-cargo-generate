@@ -1,10 +1,10 @@
-{% if tm == "bin" -%}
+{% if crate_type == "bin" -%}
 mod cli;
 {% endif -%}
 mod error;
 mod setup;
 
-{%- if tm == "bin" %}
+{%- if crate_type == "bin" %}
 pub use cli::*;
 {%- endif %}
 pub use error::*;
