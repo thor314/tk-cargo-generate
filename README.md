@@ -36,6 +36,8 @@ More templates:
 cargo install cargo-generate
 # defaults to --bin over --lib
 cargo generate thor314/tmpl [--lib] [--sync={sync|async}]  [-n YOUR_REPO_NAME] 
+# managing fmt in a template repo sucks, do it yourself
+cd YOUR_REPO_NAME && cargo fmt
 ```
 
 ## Overkill?

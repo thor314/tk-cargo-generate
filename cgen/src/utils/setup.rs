@@ -7,7 +7,7 @@ use clap::Parser;
 use validator::{Validate, ValidationError};
 {%- endif %}
 
-{% if crate_type == "bin" %}
+{%- if crate_type == "bin" %}
 use super::{cli::Args, error::MyError};
 
 /// Set up crate context, cli, logging, and environment variables.
