@@ -1,4 +1,4 @@
-{%- if crate_type == "bin" %}
+{%- if crate_type == "bin" -%}
 mod cli;
 {%- endif %}
 mod error;
