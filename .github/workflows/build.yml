@@ -30,7 +30,7 @@ jobs:
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
           ls
-          bash .github/scripts/check_test_fmt.sh
+          bash .github/scripts/check_test.sh
   sync-bin:
     runs-on: ubuntu-latest
     env:
@@ -48,7 +48,7 @@ jobs:
       - run: |
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
-          bash .github/scripts/check_test_fmt.sh
+          bash .github/scripts/check_test.sh
   async-lib:
     runs-on: ubuntu-latest
     env:
@@ -66,7 +66,7 @@ jobs:
       - run: |
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
-          bash .github/scripts/check_test_fmt.sh
+          bash .github/scripts/check_test.sh
   async-bin:
     runs-on: ubuntu-latest
     env:
@@ -84,4 +84,4 @@ jobs:
       - run: |
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
-          bash .github/scripts/check_test_fmt.sh
+          bash .github/scripts/check_test.sh

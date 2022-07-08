@@ -30,7 +30,7 @@ fn main() -> Result<()> {
     tracing::info!("Hello, {}!", context.args.name);
     #[cfg(feature = "some_feature")]
     tracing::debug!("and build info: {:#?}", context.s);
-		let pool = ThreadPool::new().expect("Failed to build pool");
+    let pool = ThreadPool::new().expect("Failed to build pool");
     let (tx, rx) = mpsc::unbounded::<i32>();
     let fut_values = async {
       let fut_tx_result =

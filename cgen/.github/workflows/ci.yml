@@ -13,7 +13,7 @@ on:
 env:
   CARGO_TERM_COLOR: always 
 
-# start 3 jobs in parallel to check lints, tests, formats.
+# check and test
 jobs:
   lint:
     name: Lint Build Test
@@ -22,7 +22,7 @@ jobs:
       # sets many `with` env defaults. https://github.com/actions/checkout
     - uses: actions/checkout@v3
       # run shell commands. must have `-`.
-    - run: bash .github/scripts/check_test_fmt.sh
+    - run: bash .github/scripts/check_test.sh
   # test:
   #   name: Test
   #   runs-on: ubuntu-latest
