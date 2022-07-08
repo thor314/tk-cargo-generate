@@ -4,13 +4,13 @@ My "batteries-and-more-included" templates with `cargo-generate`.
 ## Why bother with templates? 
 - Sanity testing is great. Templates like this make it easy to try out new libraries and test features. 
 - Save time setting up tools. Tools are great. I want them available with minimal fiddling.
-- How do I use $TOOL again? Templates remind me how to use my tools, even when I haven't picked them up recently.
+- How do I use `$TOOL` again? Templates remind me how to use my tools, even when I haven't picked them up recently.
 
 ## Current Features:
-- CI on pull-requests: verifies lints, tests, and formatting (lint/test over build)
+- CI on pull-requests: checks and tests 
 - CI with dependabot to update dependencies. Note that, since the template repo inserts symbols Cargo can't parse, this feature keeps dependencies in generated libraries up to date, but not in the template repo itself.
 - Automerge dependabot pull requests (this is insecure, but convenient as heck, and see above note.)
-- Options for library or binary templates
+- 4 options for sync/async, bin/lib templates
 - A template `clap` CLI tools
 - Logging with `log` and `env_logger`
 - Error handling with `anyhow` and `this-error`
@@ -26,18 +26,18 @@ My "batteries-and-more-included" templates with `cargo-generate`.
 
 ## To do:
 More templates:
-- Async template
+- Macro, Procedural Macro examples
 - Rocket HTTP server template
 - TUI template, similar to: https://github.com/orhun/rust-tui-template
 - Rhai-script examples
-Options:
-- Option to turn off CI, Licensing 
 
 ## Usage
 ```sh
 cargo install cargo-generate
-# --bin is default
-cargo generate thor314/tmpl [--lib] [-n YOUR_REPO_NAME] 
+# defaults to --bin over --lib
+cargo generate thor314/tmpl [--lib] [--sync={sync|async}]  [-n YOUR_REPO_NAME] 
+# managing fmt in a template repo sucks, do it yourself
+cd YOUR_REPO_NAME && cargo fmt
 ```
 
 ## Overkill?

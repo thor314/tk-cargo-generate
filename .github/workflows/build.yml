@@ -10,7 +10,7 @@ on:
 
 # Run cargo check on all variants
 jobs:
-  check-lib:
+  sync-lib:
     runs-on: ubuntu-latest
     env:
       PROJECT_NAME: mytemplate
@@ -20,7 +20,7 @@ jobs:
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
-          other: "--lib"
+          other: "--lib -d sync=sync"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
@@ -30,8 +30,8 @@ jobs:
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
           ls
-          bash .github/scripts/check_test_fmt.sh
-  check-bin:
+          bash .github/scripts/check_test.sh
+  sync-bin:
     runs-on: ubuntu-latest
     env:
       PROJECT_NAME: mytemplate
@@ -41,11 +41,47 @@ jobs:
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
-          other: "--bin"
+          other: "--bin -d sync=sync"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
       - run: |
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
-          bash .github/scripts/check_test_fmt.sh
+          bash .github/scripts/check_test.sh
+  async-lib:
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_NAME: mytemplate
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cargo-generate/cargo-generate-action@v0.11.0
+        with:
+          name: ${{ env.PROJECT_NAME }}
+          template: cgen
+          other: "--lib -d sync=async"
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: |
+          mv $PROJECT_NAME ${{ runner.temp }}/
+          cd ${{ runner.temp }}/$PROJECT_NAME
+          bash .github/scripts/check_test.sh
+  async-bin:
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_NAME: mytemplate
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cargo-generate/cargo-generate-action@v0.11.0
+        with:
+          name: ${{ env.PROJECT_NAME }}
+          template: cgen
+          other: "--bin -d sync=async"
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: |
+          mv $PROJECT_NAME ${{ runner.temp }}/
+          cd ${{ runner.temp }}/$PROJECT_NAME
+          bash .github/scripts/check_test.sh

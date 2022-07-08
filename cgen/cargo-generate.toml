@@ -9,13 +9,10 @@
 # -   `{{within_cargo_project}}` : buggy; `true` if the template is a `Cargo` project: if `Cargo.toml` is present in any parent folder.
 # -   `{{is_init}}` - buggy; reflects value of `--init` flag; `--init`: drop template in place
 
-
-
 [template]
 cargo_generate_version = ">=0.10.0"
 
 # placeholders: https://cargo-generate.github.io/cargo-generate/templates/custom_placeholders.html
-
 # [placeholders.gh-username]
 # type = "string"
 # prompt = "GitHub username (or organization)?"
@@ -23,16 +20,18 @@ cargo_generate_version = ">=0.10.0"
 # # this requirement is not captured by the regex at the moment.
 # regex = "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
 
-# [placeholders.description]
-# type = "string"
-# prompt = "Project description?"
+[placeholders.sync]
+type = "string"
+prompt = "Sync or async?" # sync by default
+choices = ["sync", "async"]
+default = "sync"
 
 # conditionals: https://cargo-generate.github.io/cargo-generate/templates/conditional.html
 [conditional.'crate_type == "lib"']
 ignore = [ "src/main.rs", "src/utils/cli.rs", ".env" ]
 
 [conditional.'crate_type == "bin"']
-ignore = [ "src/lib.rs" ]
+ignore = [ "src/lib.rs", "Cargo.lock" ]
 
 # run pre/post scripts with https://rhai.rs/book/
 # [hooks]
