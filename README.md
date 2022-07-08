@@ -7,7 +7,7 @@ My "batteries-and-more-included" templates with `cargo-generate`.
 - How do I use `$TOOL` again? Templates remind me how to use my tools, even when I haven't picked them up recently.
 
 ## Current Features:
-- CI on pull-requests: verifies lints, tests, and formatting (lint/test over build)
+- CI on pull-requests: checks and tests 
 - CI with dependabot to update dependencies. Note that, since the template repo inserts symbols Cargo can't parse, this feature keeps dependencies in generated libraries up to date, but not in the template repo itself.
 - Automerge dependabot pull requests (this is insecure, but convenient as heck, and see above note.)
 - 4 options for sync/async, bin/lib templates

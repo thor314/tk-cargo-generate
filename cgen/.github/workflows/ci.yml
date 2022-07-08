@@ -11,12 +11,12 @@ on:
     branches: [ "main" ]
 
 env:
-  CARGO_TERM_COLOR: always 
+  CARGO_TERM_COLOR: always # pretty colors
 
 # check and test
 jobs:
-  lint:
-    name: Lint Build Test
+  check-test:
+    name: Check and Test
     runs-on: ubuntu-latest
     steps:
       # sets many `with` env defaults. https://github.com/actions/checkout
