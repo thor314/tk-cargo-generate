@@ -11,6 +11,7 @@
 
 [template]
 cargo_generate_version = ">=0.10.0"
+ignore = [ "target" ]
 
 # placeholders: https://cargo-generate.github.io/cargo-generate/templates/custom_placeholders.html
 # [placeholders.gh-username]
@@ -25,6 +26,7 @@ type = "string"
 prompt = "Sync or async?" # sync by default
 choices = ["sync", "async"]
 default = "sync"
+
 
 # conditionals: https://cargo-generate.github.io/cargo-generate/templates/conditional.html
 [conditional.'crate_type == "lib"']
