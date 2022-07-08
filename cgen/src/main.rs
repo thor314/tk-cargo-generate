@@ -16,6 +16,7 @@ use futures::{
 use utils::MyError;
 use validator::{Validate, ValidationError};
 
+#[cfg(test)] mod tests;
 mod utils;
 
 {%- if async %}
