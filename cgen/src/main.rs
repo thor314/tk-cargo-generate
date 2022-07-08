@@ -7,7 +7,8 @@
 use anyhow::Result;
 use clap::Parser;
 {%- if sync == "async" %}
-use futures::{executor::ThreadPool, StreamExt};
+use futures::{executor::{self, ThreadPool}, StreamExt};
+use tokio::sync::mpsc;
 {%- endif %}
 use utils::MyError;
 use validator::{Validate, ValidationError};
@@ -26,8 +27,8 @@ fn main() -> Result<()> {
     tracing::info!("Hello, {}!", context.args.name);
     #[cfg(feature = "some_feature")]
     tracing::debug!("and build info: {:#?}", context.s);
-    let pool = futures::ThreadPool::new().expect("Failed to build pool");
-    let (tx, rx) = tokio::mpsc::unbounded::<i32>();
+    let pool = ThreadPool::new().expect("Failed to build pool");
+    let (tx, rx) = mpsc::unbounded::<i32>();
     let fut_values = async {
       let fut_tx_result = async move {
         (0..100).for_each(|v| tx.unbounded_send(v).expect("failed to send")) };
