@@ -10,7 +10,7 @@ on:
 
 # Run cargo check on all variants
 jobs:
-  check-lib:
+  sync-lib:
     runs-on: ubuntu-latest
     env:
       PROJECT_NAME: mytemplate
@@ -20,7 +20,7 @@ jobs:
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
-          other: "--bin -d sync=sync"
+          other: "--lib -d sync=sync"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
@@ -31,7 +31,7 @@ jobs:
           cd ${{ runner.temp }}/$PROJECT_NAME
           ls
           bash .github/scripts/check_test_fmt.sh
-  check-bin:
+  sync-bin:
     runs-on: ubuntu-latest
     env:
       PROJECT_NAME: mytemplate
@@ -49,7 +49,7 @@ jobs:
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
           bash .github/scripts/check_test_fmt.sh
-  check-async-lib:
+  async-lib:
     runs-on: ubuntu-latest
     env:
       PROJECT_NAME: mytemplate
@@ -67,7 +67,7 @@ jobs:
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
           bash .github/scripts/check_test_fmt.sh
-  check-async-bin:
+  async-bin:
     runs-on: ubuntu-latest
     env:
       PROJECT_NAME: mytemplate
