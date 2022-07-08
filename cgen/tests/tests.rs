@@ -3,9 +3,7 @@
 use arbitrary::Arbitrary;
 use quickcheck_macros::quickcheck;
 use rstest::{fixture, rstest};
-// use crate::*;
-
-fn init_test_logs() { let _ = env_logger::builder().is_test(true).try_init(); }
+use test_log::test as ltest; // logs in tests, can wrap other test macros
 
 /// a template of some context to take into functions
 #[derive(Clone, Debug, Eq, PartialEq, Arbitrary)]
@@ -16,15 +14,18 @@ struct Workbench {
 
 // set up test state in a workbench fixture.
 #[fixture]
-fn workbench() -> Workbench {
-  init_test_logs();
-  Workbench { b: true, n: 0 }
-}
+fn workbench() -> Workbench { Workbench { b: true, n: 0 } }
 
 #[rstest] // use it as context in tests, and to set-up case-by-case fuzzing
 #[case(0, true, true)]
 #[case(1, true, false)]
+#[ltest] // must follow rtest
 fn test_workbench(workbench: Workbench, #[case] n: usize, #[case] b: bool, #[case] out: bool) {
+  {%- if sync == "async" %}
+  tracing::info!("an async test log!");
+  {%- else %}
+  log::info!("a test log!");
+  {%- endif %}
   let wb = Workbench { n, b };
   let matches = workbench == wb;
   assert_eq!(matches, out);
@@ -43,10 +44,16 @@ fn reverse<T: Clone>(xs: &[T]) -> Vec<T> {
   rev
 }
 
+{%- if sync == "async" %}
+// use the tokio basic_scheduler for the current thread, or:
+// #[ltest(tokio::test(threaded_scheduler))] // a multi_threaded scheduler
+#[ltest(tokio::test)] 
+async fn test_async() {
+  tracing::info!("Looks async!");
+  assert!(2 + 4 == 6);
+}
+{%- endif %}
+
 // fuzz, declare quickcheck on any argument implementing Arbitrary
 #[quickcheck]
-fn prop(xs: Vec<u32>) -> bool {
-  // init_test_logs();
-  // log::warn!("{xs:?}");
-  xs == reverse(&reverse(&xs))
-}
+fn prop(xs: Vec<u32>) -> bool { xs == reverse(&reverse(&xs)) }

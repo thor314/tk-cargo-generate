@@ -8,34 +8,48 @@ description = """{{description}}"""
 license = "Unlicense OR MIT"
 
 [dependencies]
-{% if crate_type == "bin" %}
+{%- if crate_type == "bin" %}
 # Binary
 dotenv = "0.15" # .env file parsing
 clap = { version = "3.2", features = ["derive"] }
 validator = { version = "0.15", features = ["derive"] }
-{% endif %}
+
+{%- endif %}
 # Common
-cfg-if = { version = "1.0.0" } # branching compilation logic
 
 # Common, but not used in this template. optional => won't be compiled unless used
+cfg-if = { version = "1.0.0", optional = true} # branching compilation logic
 serde = { version = "1", features = ["derive"], optional = true }
 serde_json = { version = "1.0", optional = true }
 rand = { version = "0.8", optional = true }
 cute =  { version ="0.3", optional = true } # python-like list comprehensions
-{% if crate_type == "lib" %}
+{%- if crate_type == "lib" %}
 validator = { version = "0.15", features = ["derive"], optional = true}
-{% endif %}
+{%- endif %}
+
 # Error Handling
 thiserror = "1.0"
 anyhow = "1.0"
 
+{%- if sync == "async" %}
+# Async dependencies
+tokio = { version = "1", features = ["full"] }
+futures =  { version ="0.3", features = ["executor", "thread-pool"] } 
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+{%- else %}
 # Logging
 log = "0.4" 
 env_logger = "0.9"
+{%- endif %}
 
-# Rhai scripting
+# Rhai scripting (todo)
 # https://rhai.rs/book/start/features.html
 # rhai = { version = "1.8.0", features = [ "sync", "unchecked", "only_i32", "no_float", "no_module", "no_function" ] }
+
+# Your dependencies
 
 [features]
 some_feature = ["dep:serde","dep:serde_json"] # use this to use optional dependencies
@@ -45,6 +59,11 @@ some_feature = ["dep:serde","dep:serde_json"] # use this to use optional depende
 criterion = "0.3"
 iai = "0.1" # criterion alternative
 # Testing utils
+{%- if sync == "async" %}
+test-log =  { version = "0.2", default-features = false, features = ["trace"] } 
+{%- else %}
+test-log = "0.2" # log/tracing independent test-log consumer
+{%- endif %}
 rstest = "0.15"
 quickcheck = "1.0"
 quickcheck_macros = "1" # derive 
