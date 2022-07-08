@@ -16,12 +16,13 @@ validator = { version = "0.15", features = ["derive"] }
 
 {%- endif %}
 # Common
-
-# Common, but not used in this template. optional => won't be compiled unless used
+# optional => can use in a feature, otherwise, ignored; remove optional to use normally.
 cfg-if = { version = "1.0.0", optional = true} # branching compilation logic
 serde = { version = "1", features = ["derive"], optional = true }
 serde_json = { version = "1.0", optional = true }
 rand = { version = "0.8", optional = true }
+# https://rhai.rs/book/start/features.html
+rhai = { version = "1.8.0", optional = true } # scripting lanugage, yeet
 cute =  { version ="0.3", optional = true } # python-like list comprehensions
 {%- if crate_type == "lib" %}
 validator = { version = "0.15", features = ["derive"], optional = true}
@@ -45,11 +46,8 @@ log = "0.4"
 env_logger = "0.9"
 {%- endif %}
 
-# Rhai scripting (todo)
-# https://rhai.rs/book/start/features.html
-# rhai = { version = "1.8.0", features = [ "sync", "unchecked", "only_i32", "no_float", "no_module", "no_function" ] }
-
 # Your dependencies
+
 
 [features]
 some_feature = ["dep:serde","dep:serde_json"] # use this to use optional dependencies
