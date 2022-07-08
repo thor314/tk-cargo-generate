@@ -51,7 +51,7 @@ fn valid(_s: &str) -> Result<(), ValidationError> { Ok(()) }
 /// Set up the tracing filter level using the env value, or else set it here. Reads RUST_LOG.
 /// TRACE < DEBUG < INFO < WARN < ERROR
 pub(crate) fn init_logger() {
-	let filter = tracing_subscriber::filter::LevelFilter::INFO.into();
+  let filter = tracing_subscriber::filter::LevelFilter::INFO.into();
   tracing_subscriber::filter::EnvFilter::builder().with_default_directive(filter).from_env_lossy();
 }
 {%- else %}
