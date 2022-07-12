@@ -32,7 +32,7 @@ pub(crate) struct Context {
 }
 
 impl Context {
-  {%- if sync == "async" %}
+  {%- if async == true %}
   #[tracing::instrument] // declare a tracing span to log
   fn new(args: Args) -> Self {
     tracing::info!("async setting up context");
@@ -47,7 +47,7 @@ impl Context {
 fn valid(_s: &str) -> Result<(), ValidationError> { Ok(()) }
 {%- endif %}
 
-{%- if sync == "async" %}
+{%- if async == true %}
 /// Set up the tracing filter level using the env value, or else set it here. Reads RUST_LOG.
 /// TRACE < DEBUG < INFO < WARN < ERROR
 pub(crate) fn init_logger() {

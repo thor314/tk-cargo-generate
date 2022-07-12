@@ -6,7 +6,7 @@
 #![allow(dead_code)]
 use anyhow::Result;
 use clap::Parser;
-{%- if sync == "async" %}
+{%- if async %}
 use futures::{
   channel::mpsc,
   executor::{self, ThreadPool},
@@ -18,7 +18,7 @@ use validator::{Validate, ValidationError};
 
 mod utils;
 
-{%- if sync == "async" %}
+{%- if async %}
 #[tokio::main]
 async fn main() -> Result<()> {
 {%- else %}
@@ -26,7 +26,7 @@ fn main() -> Result<()> {
 {%- endif %}
   let context = utils::setup()?;
   if std::env::var("DOTENV_OK").is_ok() {
-    {%- if sync == "async" %}
+    {%- if async %}
     tracing::info!("Hello, {}!", context.args.name);
     #[cfg(feature = "some_feature")]
     tracing::debug!("and build info: {:#?}", context.s);

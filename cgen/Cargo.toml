@@ -31,7 +31,7 @@ validator = { version = "0.15", features = ["derive"], optional = true}
 thiserror = "1.0"
 anyhow = "1.0"
 
-{%- if sync == "async" %}
+{%- if async == true %}
 # Async dependencies
 tokio = { version = "1", features = ["full"] }
 futures =  { version ="0.3", features = ["executor", "thread-pool"] } 
@@ -59,7 +59,7 @@ some_feature = ["dep:serde","dep:serde_json"] # use this to use optional depende
 criterion = "0.3"
 iai = "0.1" # criterion alternative
 # Testing utils
-{%- if sync == "async" %}
+{%- if async == true %}
 test-log =  { version = "0.2", default-features = false, features = ["trace"] } 
 {%- else %}
 test-log = "0.2" # log/tracing independent test-log consumer

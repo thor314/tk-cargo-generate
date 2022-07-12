@@ -21,7 +21,7 @@ fn workbench() -> Workbench { Workbench { b: true, n: 0 } }
 #[case(1, true, false)]
 #[ltest] // must follow rtest
 fn test_workbench(workbench: Workbench, #[case] n: usize, #[case] b: bool, #[case] out: bool) {
-  {%- if sync == "async" %}
+  {%- if async == true %}
   tracing::info!("an async test log!");
   {%- else %}
   log::info!("a test log!");
@@ -44,7 +44,7 @@ fn reverse<T: Clone>(xs: &[T]) -> Vec<T> {
   rev
 }
 
-{%- if sync == "async" %}
+{%- if async == true %}
 // use the tokio basic_scheduler for the current thread, or:
 // #[ltest(tokio::test(threaded_scheduler))] // a multi_threaded scheduler
 #[ltest(tokio::test)]
