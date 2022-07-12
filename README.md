@@ -40,6 +40,17 @@ cargo generate thor314/tmpl [--lib] [--sync={sync|async}]  [-n YOUR_REPO_NAME]
 cd YOUR_REPO_NAME && cargo fmt
 ```
 
+## Some aliases I regularly use:
+```sh
+alias cgt='cargo generate --path ~/r/tmpl/cgen -n '
+alias cgtb='cargo generate --path ~/r/tmpl/cgen --bin -n cgtbin -d async=f -d minimal=f'
+alias cgtl='cargo generate --path ~/r/tmpl/cgen -n cgtlib -d async=f -d minimal=f -d workspace=f'
+alias cgtab='cargo generate --path ~/r/tmpl/cgen --bin -n cgtabin -d async=t -d minimal=f'
+alias cgtal='cargo generate --path ~/r/tmpl/cgen -n cgtalib -d async=t -d minimal=f -d workspace=f'
+alias cgtlw='cargo generate --path ~/r/tmpl/cgen -n cgtlib -d async=f -d minimal=f -d workspace=t'
+alias cgtalw='cargo generate --path ~/r/tmpl/cgen -n cgtalib -d async=t -d minimal=f -d workspace=t'
+```
+
 ## Overkill?
 Yes. But I'd rather have the overkill all-the-features as a reference than to not have them. Save time, do it once is
 the MO.
@@ -50,3 +61,4 @@ Cool, drop an issue or a pull request!
 ## Alternatives:
 - [rust-github/template](https://github.com/rust-github/template) - a lighter template for `cargo-generate`, with APACHE-MIT dual licensing
 - fork this repo, modify it to your needs, and do it yourself, and maybe submit a pull? (**recommended**)
+

@@ -11,29 +11,43 @@
 
 [template]
 cargo_generate_version = ">=0.10.0"
-ignore = [ "target" ]
+ignore = [ "target", "Cargo.lock" ] # never include target or lockfile
 
 # placeholders: https://cargo-generate.github.io/cargo-generate/templates/custom_placeholders.html
-# [placeholders.gh-username]
-# type = "string"
-# prompt = "GitHub username (or organization)?"
-# # The username cannot end with a hyphen, too, but
-# # this requirement is not captured by the regex at the moment.
-# regex = "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
+# eg, regex validation (not used here): regex = "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
 
-[placeholders.sync]
-type = "string"
-prompt = "Sync or async?" # sync by default
-choices = ["sync", "async"]
-default = "sync"
-
+[placeholders.async] # logging and async runtime dependencies
+type = "bool" # available: string, bool
+prompt = "async? Adds async Tokio runtime, futures, tracing crates." 
+default = false
 
 # conditionals: https://cargo-generate.github.io/cargo-generate/templates/conditional.html
+# Only ask for workspace if crate-type is lib
+[conditional.'crate_type == "lib"'.placeholders]
+workspace = { type = "bool", prompt = "Workspace? Default false.", default = false } 
+
+# [conditional.'workspace == false'.placeholders]
+# minimal = { type = "bool", prompt = "Minimal? Excludes licensing, contributing, CI. Good when creating new crates inside a workspace.",  default = false }
+
+# Features more exclusive than the mile-high club
 [conditional.'crate_type == "lib"']
 ignore = [ "src/main.rs", "src/utils/cli.rs", ".env" ]
 
 [conditional.'crate_type == "bin"']
-ignore = [ "src/lib.rs", "Cargo.lock" ]
+ignore = [ "src/lib.rs" ]
+
+# forkers: use this to remove shit you might not want like in this template, but want to keep around
+# intended to work well with creating a new crate inside a workspace.
+# [conditional.'minimal == "true"']
+# ignore = [ "COPYING", "LICENSE-MIT", "UNLICENSE", "CONTRIBUTING", ".github" ]
+
+# automerge doesn't work well for workspaces.
+[conditional.'workspace == true'] 
+ignore = [ ".github/workflows/ci.yml", ".github/dependabot_automerge.yml", ".github/dependabot.yml"]
+post = [ "workspace.rhai" ] # move Cargo.toml to {{crate-name}}/Cargo.toml and Workpspace.Cargo.toml to Cargo.toml
+
+[conditional.'workspace == false'] 
+ignore = [ "workspace", ".github/workflows/workspace_ci.yml" ]
 
 # run pre/post scripts with https://rhai.rs/book/
 # [hooks]
