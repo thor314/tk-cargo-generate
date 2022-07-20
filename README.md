@@ -30,6 +30,7 @@ More templates:
 - Rocket HTTP server template
 - TUI template, similar to: https://github.com/orhun/rust-tui-template
 - Rhai-script examples
+- https://github.com/inanna-malick/rust_frontend_and_backend_template
 
 ## Usage
 ```sh

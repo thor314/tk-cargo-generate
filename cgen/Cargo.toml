@@ -3,7 +3,7 @@ name = "{{project-name}}"
 version = "0.1.0"
 edition = "2021"
 authors = ["{{authors}}"]
-repository = "https://github.com/{{gh-username}}/{{project-name}}"
+repository = "https://github.com/thor314/{{project-name}}"
 description = """{{description}}"""
 license = "Unlicense OR MIT"
 
