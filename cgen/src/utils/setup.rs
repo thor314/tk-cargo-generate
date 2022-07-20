@@ -38,7 +38,7 @@ impl Context {
     tracing::info!("async setting up context");
     Self { s: "".into(), args }
   }
-  {%- elsif sync == "sync" %}
+  {%- else %}
   fn new(args: Args) -> Self { Self { s: "".into(), args } }
   {%- endif %}
 }
