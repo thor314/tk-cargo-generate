@@ -35,6 +35,7 @@ anyhow = "1.0"
 {%- if sync == "async" %}
 # Async dependencies
 tokio = { version = "1", features = ["full"] }
+# tokio-stream = { version = "0.1.9" } # tokio 1.0 didn't ship with stream utilities
 futures =  { version ="0.3", features = ["executor", "thread-pool"] } 
 
 # Logging
