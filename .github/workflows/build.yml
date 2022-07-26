@@ -20,7 +20,7 @@ jobs:
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
-          other: "--lib -d sync=sync"
+          other: "--lib -d sync=true"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
@@ -41,7 +41,7 @@ jobs:
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
-          other: "--bin -d sync=sync"
+          other: "--bin -d sync=true"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -59,7 +59,7 @@ jobs:
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
-          other: "--lib -d sync=async"
+          other: "--lib -d sync=false"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -77,7 +77,7 @@ jobs:
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
-          other: "--bin -d sync=async"
+          other: "--bin -d sync=false"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
