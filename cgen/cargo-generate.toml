@@ -21,10 +21,10 @@ ignore = [ "target" ]
 # # this requirement is not captured by the regex at the moment.
 # regex = "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
 
-[placeholders.sync]
+[placeholders.async]
 type = "bool"
-prompt = "sync? (default: sync)" # sync by default
-default = true 
+prompt = "async? (default: false)" # sync by default
+default = false
 
 # conditionals: https://cargo-generate.github.io/cargo-generate/templates/conditional.html
 [conditional.'crate_type == "lib"']
