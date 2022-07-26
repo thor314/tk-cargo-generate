@@ -23,10 +23,14 @@ serde_json = { version = "1.0", optional = true }
 rand = { version = "0.8", optional = true }
 # https://rhai.rs/book/start/features.html
 rhai = { version = "1.8.0", optional = true } # scripting lanugage, yeet
-cute =  { version ="0.3", optional = true } # python-like list comprehensions
 {%- if crate_type == "lib" %}
 validator = { version = "0.15", features = ["derive"], optional = true}
 {%- endif %}
+
+# Convenience macros
+cute =  { version = "0.3", optional = true } # python-like list comprehensions: c!
+kiam = { version = "0.1.1", optional = true } # a kotlin-like macro for prettier conditionals: when!
+
 
 # Error Handling
 thiserror = "1.0"
@@ -35,8 +39,12 @@ anyhow = "1.0"
 {%- if async == true %}
 # Async dependencies
 tokio = { version = "1", features = ["full"] }
-# tokio-stream = { version = "0.1.9" } # tokio 1.0 didn't ship with stream utilities
 futures =  { version ="0.3", features = ["executor", "thread-pool"] } 
+
+tokio-stream = { version = "0.1.9", optional = true } # tokio 1.0 didn't ship with stream utilities, either use this or futures
+tasky = { version = "3.0.1", optional = true } # a lazy explicit task runner
+futures_concurrency = { version = "3.0.1", optional = true } # the convenient join API your mother warned you about
+merge-streams = { version = "0.1.2", optional = true } # merge streams into a single Stream
 
 # Logging
 tracing = "0.1"
