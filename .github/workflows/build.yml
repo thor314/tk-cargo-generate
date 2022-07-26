@@ -16,10 +16,10 @@ jobs:
       PROJECT_NAME: mytemplate
     steps:
       - uses: actions/checkout@v2
-      - uses: cargo-generate/cargo-generate-action@v0.11.0
+      - uses: cargo-generate/cargo-generate-action@v0.16.0
         with:
           name: ${{ env.PROJECT_NAME }}
-          template: cgen/cargo-generate.toml
+          template: cgen
           other: "--lib -d sync=true"
       - uses: actions-rs/toolchain@v1
         with:
@@ -37,11 +37,11 @@ jobs:
       PROJECT_NAME: mytemplate
     steps:
       - uses: actions/checkout@v2
-      - uses: cargo-generate/cargo-generate-action@v0.11.0
+      - uses: cargo-generate/cargo-generate-action@v0.16.0
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
-          other: "--bin -d sync=true -n cgsbtemp"
+          other: "--bin -d sync=true"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -55,7 +55,7 @@ jobs:
       PROJECT_NAME: mytemplate
     steps:
       - uses: actions/checkout@v2
-      - uses: cargo-generate/cargo-generate-action@v0.11.0
+      - uses: cargo-generate/cargo-generate-action@v0.16.0
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
@@ -73,7 +73,7 @@ jobs:
       PROJECT_NAME: mytemplate
     steps:
       - uses: actions/checkout@v2
-      - uses: cargo-generate/cargo-generate-action@v0.11.0
+      - uses: cargo-generate/cargo-generate-action@v0.16.0
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
