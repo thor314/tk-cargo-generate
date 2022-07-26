@@ -19,7 +19,7 @@ jobs:
       - uses: cargo-generate/cargo-generate-action@v0.11.0
         with:
           name: ${{ env.PROJECT_NAME }}
-          template: cgen
+          template: cgen/cargo-generate.toml
           other: "--lib -d sync=true"
       - uses: actions-rs/toolchain@v1
         with:
@@ -41,7 +41,7 @@ jobs:
         with:
           name: ${{ env.PROJECT_NAME }}
           template: cgen
-          other: "--bin -d sync=true"
+          other: "--bin -d sync=true -n cgsbtemp"
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
