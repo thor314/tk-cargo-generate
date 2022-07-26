@@ -27,10 +27,10 @@ rhai = { version = "1.8.0", optional = true } # scripting lanugage, yeet
 validator = { version = "0.15", features = ["derive"], optional = true}
 {%- endif %}
 
-# Convenience macros
+# Occasionally useful convenience macros and APIs
 cute =  { version = "0.3", optional = true } # python-like list comprehensions: c!
 kiam = { version = "0.1.1", optional = true } # a kotlin-like macro for prettier conditionals: when!
-
+tap = { version = "1.0.1", optional = true } # {tap,pipe} combinator ownership plumbing utils
 
 # Error Handling
 thiserror = "1.0"
