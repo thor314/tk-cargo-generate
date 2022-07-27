@@ -13,7 +13,7 @@ use super::{cli::Args, error::MyError};
 /// Set up crate context, cli, logging, and environment variables.
 pub(crate) fn setup() -> Result<Context> {
   dotenv::dotenv().ok();
-  {%- if sync == "async" %}
+  {%- if async == true %}
   init_tracing();
   {%- else %}
   init_logger();

@@ -44,7 +44,7 @@ futures =  { version ="0.3", features = ["executor", "thread-pool"] }
 actix = { version = "0.11.0", optional = true } # actix: ergonomic actor framework
 actix-rt = { version = "2.2", optional = true} # <-- Runtime for actix
 tokio-stream = { version = "0.1.9", optional = true } # tokio 1.0 didn't ship with stream utilities, either use this or futures
-# tasky = { version = "3.0.1", optional = true } # a lazy explicit task runner, nightly only
+# tasky = { version = "3.0.1" } # a lazy explicit task runner, nightly only
 futures-concurrency = { version = "3.0.1", optional = true } # the convenient join API your mother warned you about
 merge-streams = { version = "0.1.2", optional = true } # merge streams into a single Stream
 
