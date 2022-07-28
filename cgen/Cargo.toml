@@ -67,7 +67,7 @@ env_logger = "0.9"
 
 
 [features]
-some_feature = ["dep:serde","dep:serde_json"] # use this to use optional dependencies
+# some_feature = ["dep:serde","dep:serde_json"] # use this to use optional dependencies
 
 [dev-dependencies]
 # Bench

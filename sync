@@ -1,6 +1,0 @@
-add '.github/workflows/build.yml'
-add 'cgen/cargo-generate.toml'
-add 'sync'
-[main c7fcc2a] ci-
- 3 files changed, 7 insertions(+), 7 deletions(-)
- create mode 100644 sync
