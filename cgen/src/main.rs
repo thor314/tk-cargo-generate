@@ -29,7 +29,6 @@ fn main() -> Result<()> {
   if std::env::var("DOTENV_OK").is_ok() {
     {%- if async %}
     tracing::info!("Hello, {}!", context.args.name);
-    #[cfg(feature = "some_feature")]
     tracing::debug!("and build info: {:#?}", context.s);
     let pool = ThreadPool::new().expect("Failed to build pool");
     let (tx, rx) = mpsc::unbounded::<i32>();
@@ -45,7 +44,6 @@ fn main() -> Result<()> {
     println!("Values={:?}", values);
     {%- else %}
     log::info!("Hello, {}!", context.args.name);
-    #[cfg(feature = "some_feature")]
     log::debug!("and build info: {:#?}", context.s);
     {%- endif %}
   }
