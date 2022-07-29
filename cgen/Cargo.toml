@@ -34,6 +34,7 @@ validator = { version = "0.15", features = ["derive"] }
 # rayon = "1.5.3"  # speeding parallel processing of Iterators
 # tylift = "0.3.5" # type macro, lift enum variants into types
 # delegate = "0.7.0" # macro to forward method calls to inner types
+# async-trait = "0.1.56" # macro to write `async fn` inside traits
 
 # Error Handling
 thiserror = "1.0"
@@ -44,11 +45,16 @@ anyhow = "1.0"
 tokio = { version = "1", features = ["full"] }
 futures =  { version ="0.3", features = ["executor", "thread-pool"] } 
 
+
+
 # actix = "0.11.0" # actix: ergonomic actor framework
 # actix-rt = "2.2" # <-- Runtime for actix
 
-# More flexible/performant channel tools than std
+## Crossbeam contains many concurrency tools. This crate re-exports several subcrates.
+# crossbeam = "0.8.6" 
+## Speaking of which...these are more flexible/performant channel tools than std. 
 # crossbeam_channel = "0.5.6" 
+
 # tokio-stream = "0.1.9" # tokio 1.0 didn't ship with stream utilities, either use this or futures
 # tasky = "3.0.1" # a lazy explicit task runner, nightly only
 futures-concurrency = "3.0.1" # the convenient join API your mother warned you about
