@@ -10,8 +10,8 @@
 # -   `{{is_init}}` - buggy; reflects value of `--init` flag; `--init`: drop template in place
 
 [template]
-cargo_generate_version = ">=0.10.0"
-ignore = [ "target" ]
+cargo_generate_version=">=0.10.0"
+ignore                =["target"]
 
 # placeholders: https://cargo-generate.github.io/cargo-generate/templates/custom_placeholders.html
 # [placeholders.gh-username]
@@ -22,16 +22,16 @@ ignore = [ "target" ]
 # regex = "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
 
 [placeholders.async]
-type = "bool"
-prompt = "async? (default: false)" # sync by default
-default = false
+default=false
+prompt ="async? (default: false)" # sync by default
+type   ="bool"
 
 # conditionals: https://cargo-generate.github.io/cargo-generate/templates/conditional.html
 [conditional.'crate_type == "lib"']
-ignore = [ "src/main.rs", "src/utils/cli.rs", ".env" ]
+ignore=["src/main.rs", "src/utils/cli.rs", ".env"]
 
 [conditional.'crate_type == "bin"']
-ignore = [ "src/lib.rs", "Cargo.lock" ]
+ignore=["src/lib.rs", "Cargo.lock"]
 
 # run pre/post scripts with https://rhai.rs/book/
 # [hooks]

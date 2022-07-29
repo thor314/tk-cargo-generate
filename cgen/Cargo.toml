@@ -1,18 +1,18 @@
 [package]
-name = "{{project-name}}"
-version = "0.1.0"
-edition = "2021"
-authors = ["{{authors}}"]
-repository = "https://github.com/thor314/{{project-name}}"
-description = """{{description}}"""
-license = "Unlicense OR MIT"
+authors    ="{{authors}}"
+description="""{{description}}"""
+edition    ="2021"
+license    ="Unlicense OR MIT"
+name       ="{{project-name}}"
+repository ="https://github.com/thor314/{{project-name}}"
+version    ="0.1.0"
 
 [dependencies]
 {%- if crate_type == "bin" %}
 # Binary
-dotenv = "0.15" # .env file parsing
-clap = { version = "3.2", features = ["derive"] }
-validator = { version = "0.15", features = ["derive"] }
+clap     ={ version="3.2", features=["derive"] }
+dotenv   ="0.15"                                  # .env file parsing
+validator={ version="0.15", features=["derive"] }
 
 {%- endif %}
 # Common
@@ -28,37 +28,37 @@ validator = { version = "0.15", features = ["derive"] }
 {%- endif %}
 
 # Occasionally useful convenience macros and APIs
-# cute = "0.3"     # python-like list comprehensions: c!
-# kiam = "0.1.1"   # macro for prettier conditionals: when!
-# tap =  "1.0.1"   # {tap,pipe} combinator ownership plumbing utils
-# rayon = "1.5.3"  # speeding parallel processing of Iterators
-# tylift = "0.3.5" # type macro, lift enum variants into types
-# delegate = "0.7.0" # macro to forward method calls to inner types
 # async-trait = "0.1.56" # macro to write `async fn` inside traits
+# cute = "0.3"           # python-like list comprehensions: c!
+# delegate = "0.7.0"     # macro to forward method calls to inner types
+# kiam = "0.1.1"         # macro for prettier conditionals: when!
+# rayon = "1.5.3"        # speeding parallel processing of Iterators
+# tap =  "1.0.1"         # {tap,pipe} combinator ownership plumbing utils
+# tylift = "0.3.5"       # type macro, lift enum variants into types
 
 # Error Handling
-thiserror = "1.0"
-anyhow = "1.0"
+anyhow   ="1.0"
+thiserror="1.0"
+# Logging
+env_logger="0.9"
+log       ="0.4"
+
+clap = { version = "3.2", features = ["derive"] }
+dotenv = "0.15" # .env file parsing
+validator = { version = "0.15", features = ["derive"] }
 
 {%- if async == true %}
 # Async dependencies
-tokio = { version = "1", features = ["full"] }
-futures =  { version ="0.3", features = ["executor", "thread-pool"] } 
-
-
-
+futures = { version ="0.3", features = ["executor", "thread-pool"] } 
+tokio   = { version = "1", features = ["full"] }
 # actix = "0.11.0" # actix: ergonomic actor framework
 # actix-rt = "2.2" # <-- Runtime for actix
-
-## Crossbeam contains many concurrency tools. This crate re-exports several subcrates.
-# crossbeam = "0.8.6" 
-## Speaking of which...these are more flexible/performant channel tools than std. 
-# crossbeam_channel = "0.5.6" 
-
-# tokio-stream = "0.1.9" # tokio 1.0 didn't ship with stream utilities, either use this or futures
+# crossbeam = "0.8.6" # concurrency tool subcrates
+# crossbeam_channel = "0.5.6" # more flexible & performant channels
+# tokio-stream = "0.1.9" # tokio 1.0 didn't ship with stream utilities
 # tasky = "3.0.1" # a lazy explicit task runner, nightly only
-futures-concurrency = "3.0.1" # the convenient join API your mother warned you about
-merge-streams = "0.1.2" # merge streams into a single Stream
+# futures-concurrency = "3.0.1" # the convenient join API your mother warned you about
+# merge-streams = "0.1.2" # merge streams into a single Stream
 
 # Logging
 tracing = "0.1"
@@ -71,7 +71,6 @@ env_logger = "0.9"
 
 # Your dependencies
 
-
 [features]
 # some_feature = ["dep:serde","dep:serde_json"] # use this to use optional dependencies
 
@@ -79,16 +78,17 @@ env_logger = "0.9"
 # Bench
 criterion = "0.3"
 iai = "0.1" # criterion alternative
+
 # Testing utils
+arbitrary = { version = "1.1", features = ["derive"] } # see quickcheck
 {%- if async == true %}
 test-log =  { version = "0.2", default-features = false, features = ["trace"] } 
 {%- else %}
-test-log = "0.2" # log/tracing independent test-log consumer
+test-log = "0.2"        # log/tracing independent test-log consumer
 {%- endif %}
-rstest = "0.15"
-quickcheck = "1.0"
+quickcheck = "1.0"      # lowkey proptest suite
 quickcheck_macros = "1" # derive 
-arbitrary = { version = "1.1", features = ["derive"] }
+rstest = "0.15"         # testing convenience proc-macros
 
 [[test]]
 name = "integration"
