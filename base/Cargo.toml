@@ -56,18 +56,18 @@ futures-lite="1.12.0"
 # tasky = "3.0.1" # a lazy explicit task runner, nightly only
 # futures-concurrency = "3.0.1" # the convenient join API your mother warned you about
 # merge-streams = "0.1.2" # merge streams into a single Stream
+# pin-project = "1.0.11" # projection of a Pin from struct to fields, useful when implementing polling
 
 # Logging
 tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] } # Your dependencies start here
 {%- else %}
 
 # Logging
 log = "0.4" 
-env_logger = "0.9"
+env_logger = "0.9" # Your dependencies start here
+ 
 {%- endif %}
-
-# Your dependencies
 
 [features]
 # some_feature = ["dep:serde","dep:serde_json"] # use this to use optional dependencies
