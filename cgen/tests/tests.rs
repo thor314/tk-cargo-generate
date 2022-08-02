@@ -45,9 +45,9 @@ fn reverse<T: Clone>(xs: &[T]) -> Vec<T> {
 }
 
 {%- if async == true %}
-// use the tokio basic_scheduler for the current thread, or:
-// #[ltest(tokio::test(threaded_scheduler))] // a multi_threaded scheduler
-#[ltest(tokio::test)]
+// use the async_std basic_scheduler for the current thread, or:
+// #[ltest(async_std::test(threaded_scheduler))] // a multi_threaded scheduler
+#[ltest(async_std::test)]
 async fn test_async() {
   tracing::info!("Looks async!");
   assert!(2 + 4 == 6);
