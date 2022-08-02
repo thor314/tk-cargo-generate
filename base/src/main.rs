@@ -17,7 +17,7 @@ mod utils;
 #[async_std::main]
 async fn main() -> Result<(), MyError> {
 {%- else %}
-fn main() -> Result<()> {
+fn main() -> Result<(), MyError> {
 {%- endif %}
   let context = utils::setup()?;
   if std::env::var("DOTENV_OK").is_ok() {
