@@ -2,11 +2,11 @@
 
 // remove these when ready
 #![allow(unused_imports)]
-#![allow(unused_variables)]
-#![allow(dead_code)]
+// #![allow(unused_variables)]
+// #![allow(dead_code)]
 {%- if async %}
-use async_std::{channel, prelude};
-use futures_lite::prelude as f_prelude;
+use async_std::{channel, prelude::*};
+use futures_lite::prelude::*;
 {%- endif %}
 use utils::MyError;
 
