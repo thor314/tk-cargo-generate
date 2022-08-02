@@ -19,7 +19,7 @@ jobs:
       - uses: cargo-generate/cargo-generate-action@v0.16.0
         with:
           name: ${{ env.PROJECT_NAME }}
-          template: cgen
+          template: base
           other: "--lib -d async=false"
       - uses: actions-rs/toolchain@v1
         with:
@@ -40,7 +40,7 @@ jobs:
       - uses: cargo-generate/cargo-generate-action@v0.16.0
         with:
           name: ${{ env.PROJECT_NAME }}
-          template: cgen
+          template: base
           other: "--bin -d async=false"
       - uses: actions-rs/toolchain@v1
         with:
@@ -58,7 +58,7 @@ jobs:
       - uses: cargo-generate/cargo-generate-action@v0.16.0
         with:
           name: ${{ env.PROJECT_NAME }}
-          template: cgen
+          template: base
           other: "--lib -d async=true"
       - uses: actions-rs/toolchain@v1
         with:
@@ -76,7 +76,7 @@ jobs:
       - uses: cargo-generate/cargo-generate-action@v0.16.0
         with:
           name: ${{ env.PROJECT_NAME }}
-          template: cgen
+          template: base
           other: "--bin -d async=true"
       - uses: actions-rs/toolchain@v1
         with:
