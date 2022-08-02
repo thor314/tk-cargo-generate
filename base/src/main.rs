@@ -1,11 +1,12 @@
 //! A batteries-included binary template.
 
-// TODO: remove these when ready
+// remove these when ready
 #![allow(unused_imports)]
 #![allow(unused_variables)]
 #![allow(dead_code)]
 {%- if async %}
-use async_std::channel;
+use async_std::{channel, prelude};
+use futures_lite::prelude as f_prelude;
 {%- endif %}
 use utils::MyError;
 
