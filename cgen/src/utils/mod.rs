@@ -5,7 +5,7 @@ mod error;
 mod setup;
 
 {% if crate_type == "bin" %}
-pub use cli::*;
+// pub(crate) use cli::*;
 {% endif -%}
 pub use error::*;
-pub use setup::*;
+pub(crate) use setup::*;

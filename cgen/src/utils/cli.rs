@@ -4,7 +4,8 @@
 //! https://github.com/Keats/validator
 
 use clap::Parser;
-use validator::{Validate, ValidationError};
+// use validator::{Validate, ValidationError};
+use validator::Validate;
 
 /// A template CLI
 #[derive(Clone, Default, Debug, Parser, Validate)]

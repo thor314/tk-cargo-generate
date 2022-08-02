@@ -7,6 +7,9 @@ use thiserror::Error;
 pub enum MyError {
   #[error("My Io error")]
   Io(#[from] std::io::Error),
+  #[error("an anyhow error")]
+  Anyhow(#[from] anyhow::Error),
+  #[allow(dead_code)]
   #[error("an unhandled error")]
   Unhandled,
 }

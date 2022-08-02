@@ -4,24 +4,17 @@
 #![allow(unused_imports)]
 #![allow(unused_variables)]
 #![allow(dead_code)]
-use anyhow::Result;
-use clap::Parser;
 {%- if async %}
-use futures::{
-  channel::mpsc,
-  executor::{self, ThreadPool},
-  StreamExt,
-};
+use async_std::channel;
 {%- endif %}
 use utils::MyError;
-use validator::{Validate, ValidationError};
 
 #[cfg(test)] mod tests;
 mod utils;
 
 {%- if async %}
-#[tokio::main]
-async fn main() -> Result<()> {
+#[async_std::main]
+async fn main() -> Result<(), MyError> {
 {%- else %}
 fn main() -> Result<()> {
 {%- endif %}
@@ -30,17 +23,19 @@ fn main() -> Result<()> {
     {%- if async %}
     tracing::info!("Hello, {}!", context.args.name);
     tracing::debug!("and build info: {:#?}", context.s);
-    let pool = ThreadPool::new().expect("Failed to build pool");
-    let (tx, rx) = mpsc::unbounded::<i32>();
-    let fut_values = async {
-      let fut_tx_result =
-        async move { (0..100).for_each(|v| tx.unbounded_send(v).expect("failed send")) };
-      pool.spawn_ok(fut_tx_result); // spawn generated future
-      let fut_values = rx.map(|v| v * 2).collect();
-      // Use the executor provided to this async block to wait for the future to complete.
-      fut_values.await
-    };
-    let values: Vec<i32> = executor::block_on(fut_values); // consume the future
+    let (tx, rx) = channel::unbounded::<i32>();
+    let _ = async {
+      (0..100).for_each(|v| {
+        let _ = tx.send(v);
+      })
+    }
+    .await;
+
+    let mut values = vec![];
+    while let Ok(v) = rx.try_recv() {
+      values.push(v);
+    }
+
     println!("Values={:?}", values);
     {%- else %}
     log::info!("Hello, {}!", context.args.name);

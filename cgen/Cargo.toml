@@ -1,5 +1,5 @@
 [package]
-authors    ="{{authors}}"
+authors    =["{{authors}}"]
 description="""{{description}}"""
 edition    ="2021"
 license    ="Unlicense OR MIT"
@@ -28,7 +28,6 @@ validator={ version="0.15", features=["derive"] }
 {%- endif %}
 
 # Occasionally useful convenience macros and APIs
-# async-trait = "0.1.56" # macro to write `async fn` inside traits
 # cute = "0.3"           # python-like list comprehensions: c!
 # delegate = "0.7.0"     # macro to forward method calls to inner types
 # kiam = "0.1.1"         # macro for prettier conditionals: when!
@@ -39,13 +38,18 @@ validator={ version="0.15", features=["derive"] }
 # Error Handling
 anyhow   ="1.0"
 thiserror="1.0"
-
 {%- if async == true %}
+
 # Async dependencies
-futures = { version ="0.3", features = ["executor", "thread-pool"] } 
-tokio   = { version = "1", features = ["full"] }
+# TF are lightweight, faster compiling, less unsafe alternatives to futures/tokio.
+async-std   ={ version = "1.6", features = ["attributes"] }
+futures-lite="1.12.0"
+# futures={ version ="0.3", features = ["executor", "thread-pool"] } 
+# tokio  ={ version = "1", features = ["full"] }
+
 # actix = "0.11.0" # actix: ergonomic actor framework
 # actix-rt = "2.2" # <-- Runtime for actix
+# async-trait = "0.1.56" # macro to write `async fn` inside traits
 # crossbeam = "0.8.6" # concurrency tool subcrates
 # crossbeam_channel = "0.5.6" # more flexible & performant channels
 # tokio-stream = "0.1.9" # tokio 1.0 didn't ship with stream utilities

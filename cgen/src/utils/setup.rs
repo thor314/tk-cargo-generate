@@ -8,7 +8,7 @@ use validator::{Validate, ValidationError};
 {%- endif %}
 
 {%- if crate_type == "bin" %}
-use super::{cli::Args, error::MyError};
+use super::cli::Args;
 
 /// Set up crate context, cli, logging, and environment variables.
 pub(crate) fn setup() -> Result<Context> {
