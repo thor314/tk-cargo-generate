@@ -6,6 +6,6 @@ use test_log::test as ltest; // logs in tests, can wrap other test macros
 
 #[test]
 fn it_works() {
-  let a = 2usize;
+  let _a = 2usize;
   assert_eq!(2 + 2, 4);
 }

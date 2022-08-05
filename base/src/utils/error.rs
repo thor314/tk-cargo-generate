@@ -3,11 +3,12 @@
 
 use thiserror::Error;
 
+// https://docs.rs/thiserror/latest/thiserror/
 #[derive(Debug, Error)]
 pub enum MyError {
-  #[error("My Io error")]
+  #[error("My Io error: {0}")]
   Io(#[from] std::io::Error),
-  #[error("an anyhow error")]
+  #[error(transparent)]
   Anyhow(#[from] anyhow::Error),
   #[allow(dead_code)]
   #[error("an unhandled error")]
