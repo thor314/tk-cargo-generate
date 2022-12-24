@@ -8,13 +8,12 @@ repository ="https://github.com/thor314/{{project-name}}"
 version    ="0.1.0"
 
 [dependencies]
-{%- if crate_type == "bin" %}
-# Binary
-clap     ={ version="3.2", features=["derive"] }
-dotenv   ="0.15"                                  # .env file parsing
-validator={ version="0.15", features=["derive"] }
+dotenv   ="0.15"
+anyhow   ="1.0"
+thiserror="1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] } 
 
-{%- endif %}
 # Common
 # itertools = "0.10.3" # danielkeep.github.io/itercheat_baked.html
 # cfg-if = "1.0.0" # branching compilation logic
@@ -23,9 +22,6 @@ validator={ version="0.15", features=["derive"] }
 # rand = { version = "0.8" }
 # https://rhai.rs/book/start/features.html
 # rhai = { version = "1.8.0" } # scripting lanugage, yeet
-{%- if crate_type == "lib" %}
-# validator = { version = "0.15", features = ["derive"]}
-{%- endif %}
 
 # Occasionally useful convenience macros and APIs
 # cute = "0.3"           # python-like list comprehensions: c!
@@ -35,15 +31,10 @@ validator={ version="0.15", features=["derive"] }
 # tap =  "1.0.1"         # {tap,pipe} combinator ownership plumbing utils
 # tylift = "0.3.5"       # type macro, lift enum variants into types
 
-# Error Handling
-anyhow   ="1.0"
-thiserror="1.0"
-{%- if async == true %}
-
 # Async dependencies
 # TF are lightweight, faster compiling, less unsafe alternatives to futures/tokio.
-async-std   ={ version = "1.6", features = ["attributes"] }
-futures-lite="1.12.0"
+# async-std   ={ version = "1.6", features = ["attributes"] }
+# futures-lite="1.12.0"
 # futures={ version ="0.3", features = ["executor", "thread-pool"] } 
 # tokio  ={ version = "1", features = ["full"] }
 
@@ -58,32 +49,13 @@ futures-lite="1.12.0"
 # merge-streams = "0.1.2" # merge streams into a single Stream
 # pin-project = "1.0.11" # projection of a Pin from struct to fields, useful when implementing polling
 
-# Logging
-tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] } # Your dependencies start here
-{%- else %}
-
-# Logging
-log = "0.4" 
-env_logger = "0.9" # Your dependencies start here
- 
-{%- endif %}
-
-[features]
-# some_feature = ["dep:serde","dep:serde_json"] # use this to use optional dependencies
-
 [dev-dependencies]
 # Bench
 criterion = "0.3"
-iai = "0.1" # criterion alternative
 
 # Testing utils
 arbitrary = { version = "1.1", features = ["derive"] } # see quickcheck
-{%- if async == true %}
 test-log =  { version = "0.2", default-features = false, features = ["trace"] } 
-{%- else %}
-test-log = "0.2"        # log/tracing independent test-log consumer
-{%- endif %}
 quickcheck = "1.0"      # lowkey proptest suite
 quickcheck_macros = "1" # derive 
 rstest = "0.15"         # testing convenience proc-macros

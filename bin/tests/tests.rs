@@ -1,5 +1,5 @@
-//! Integration tests with rstest. Also see rstest's listed case-enumeration.
-//! https://docs.rs/rstest/latest/rstest/#creating-a-test-for-each-combinations-of-given-values
+// Integration tests with rstest. Also see rstest's listed case-enumeration.
+// https://docs.rs/rstest/latest/rstest/#creating-a-test-for-each-combinations-of-given-values
 use arbitrary::Arbitrary;
 use quickcheck_macros::quickcheck;
 use rstest::{fixture, rstest};
@@ -21,11 +21,7 @@ fn workbench() -> Workbench { Workbench { b: true, n: 0 } }
 #[case(1, true, false)]
 #[ltest] // must follow rtest
 fn test_workbench(workbench: Workbench, #[case] n: usize, #[case] b: bool, #[case] out: bool) {
-  {%- if async == true %}
   tracing::info!("an async test log!");
-  {%- else %}
-  log::info!("a test log!");
-  {%- endif %}
   let wb = Workbench { n, b };
   let matches = workbench == wb;
   assert_eq!(matches, out);
@@ -43,16 +39,6 @@ fn reverse<T: Clone>(xs: &[T]) -> Vec<T> {
   }
   rev
 }
-
-{%- if async == true %}
-// use the async_std basic_scheduler for the current thread, or:
-// #[ltest(async_std::test(threaded_scheduler))] // a multi_threaded scheduler
-#[ltest(async_std::test)]
-async fn test_async() {
-  tracing::info!("Looks async!");
-  assert!(2 + 4 == 6);
-}
-{%- endif %}
 
 // fuzz, declare quickcheck on any argument implementing Arbitrary
 #[quickcheck]
