@@ -15,14 +15,14 @@ env:
 
 # check and test
 jobs:
-  check-test:
-    name: Check and Test
+  check-test-fmt:
+    name: Check Test Format
     runs-on: ubuntu-latest
     steps:
       # sets many `with` env defaults. https://github.com/actions/checkout
     - uses: actions/checkout@v3
       # run shell commands. must have `-`.
-    - run: bash .github/scripts/check_test.sh
+    - run: bash .github/scripts/check_test_fmt.sh
   # test:
   #   name: Test
   #   runs-on: ubuntu-latest

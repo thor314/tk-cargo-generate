@@ -8,4 +8,4 @@ set -e # exit immediately if command ends with non-zero exit status.
 # ✨check test..let someone else fmt✨
 cargo check
 cargo test --all-features --verbose
-# cargo fmt --all -- --check
+cargo fmt --all -- --check

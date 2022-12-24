@@ -1,0 +1,3 @@
+# List of lints: https://rust-lang.github.io/rust-clippy/master/index.html 
+new-without-default = false
+too-many-arguments = false

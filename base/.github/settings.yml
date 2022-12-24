@@ -3,7 +3,7 @@
 
 repository:
   description: {{description}}
-  homepage: docs.rs/{{project-name}}
+  #homepage: docs.rs/{{project-name}}
   # topics: rust other_topics
   has_issues: true
   has_projects: false
