@@ -1,10 +1,13 @@
 # Templates for personal use
-Problem: I want to set up a repo with nice things, with a CLI like `cargo new`, but with common tools I reach for. 
-I want to set these things up and have them there when I want them, and not have to think about it.
+Problem: I want to set up a repo with nice things, with a CLI like `cargo new`, but with all the common tools I reach for. 
+
+I want to set these things up *once.*
 
 Things I always want:
 - Licensing: I always want MIT/Apache. 
-- Github CI (lint, test, format by default)
+- Github CI to lint, test, and format
+- Github CI to auto-update my dependencies
+
 - Some libraries (`anyhow`, `thiserror`, `log`, and sometimes certain testing/benching tools like `criterion`)
 
 Things I often want:
