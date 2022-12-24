@@ -25,17 +25,9 @@ ignore                =["target"]
 type = "string"
 prompt = "What description? "
 
-[placeholders.async]
-default=false
-prompt ="async? (default: false)" # sync by default
-type   ="bool"
-
 # conditionals: https://cargo-generate.github.io/cargo-generate/templates/conditional.html
-[conditional.'crate_type == "lib"']
-ignore=["src/main.rs", "src/utils/cli.rs", ".env"]
-
-[conditional.'crate_type == "bin"']
-ignore=["src/lib.rs", "Cargo.lock"]
+# [conditional.'crate_type == "lib"']
+# ignore=["src/main.rs", "src/utils/cli.rs", ".env"]
 
 # run pre/post scripts with https://rhai.rs/book/
 # [hooks]

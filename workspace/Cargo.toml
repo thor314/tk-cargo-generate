@@ -1,0 +1,13 @@
+[workspace]
+authors    =["{{authors}}"]
+description="""{{description}}"""
+edition    ="2021"
+license    ="Apache2.0 OR MIT"
+name       ="{{project-name}}"
+repository ="https://github.com/thor314/{{project-name}}"
+version    ="0.1.0"
+
+
+members = [
+    "{{first_subcrate}}",
+]
