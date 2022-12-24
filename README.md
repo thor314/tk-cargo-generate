@@ -1,19 +1,21 @@
-# Templates
-My "batteries-and-more-included" templates with `cargo-generate`.
+# Templates for personal use
+Problem: I want to set up a repo with nice things, with a CLI like `cargo new`, but with common tools I reach for. 
+I want to set these things up and have them there when I want them, and not have to think about it.
 
-## Why bother with templates? 
-- Sanity testing is great. Templates like this make it easy to try out new libraries and test features. 
-- Save time setting up tools. Tools are great. I want them available with minimal fiddling.
-- How do I use `$TOOL` again? Templates remind me how to use my tools, even when I haven't picked them up recently.
+Things I always want:
+- Licensing: I always want MIT/Apache. 
+- Github CI (lint, test, format by default)
+- Some libraries (`anyhow`, `thiserror`, `log`, and sometimes certain testing/benching tools like `criterion`)
 
-## Current Features:
+Things I often want:
+
+Things I sometimes want: crates automatically imported and up-to-date. These depend on whether I'm writing a library or a binary, but I always want certain crates available, like `anyhow` and `log`.
 - CI on pull-requests: checks and tests 
 - CI with dependabot to update dependencies. Note that, since the template repo inserts symbols Cargo can't parse, this feature keeps dependencies in generated libraries up to date, but not in the template repo itself.
 - Automerge dependabot pull requests (this is insecure, but convenient as heck, and see above note.)
 - 4 options for sync/async, bin/lib templates
 - A template `clap` CLI tools
 - Logging with `log` and `env_logger`
-- Error handling with `anyhow` and `this-error`
 - Environment variables with `dotenv`
 - Input validation with `validator`
 - Benching with `criterion` and `iai`
@@ -24,6 +26,15 @@ My "batteries-and-more-included" templates with `cargo-generate`.
 - Licensing: permissive dual Unlicense/MIT licensing
 - Several optional common dependencies; won't be built unless used
 
+
+My "batteries-and-more-included" templates with `cargo-generate`.
+
+## Why bother with templates? 
+- Sanity testing is great. Templates like this make it easy to try out new libraries and test features. 
+- Save time setting up tools. Tools are great. I want them available with minimal fiddling.
+- How do I use `$TOOL` again? Templates remind me how to use my tools, even when I haven't picked them up recently.
+
+## Current Features:
 ## To do:
 More templates:
 - Macro, Procedural Macro examples
