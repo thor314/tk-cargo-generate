@@ -17,7 +17,7 @@ cargo fmt --all -- --check
 
 # https://taplo.tamasfe.dev/cli/installation/binary.html
 # Binary releases currently broken
-options are to install via npm or with cargo.
+# options are to install via npm or with cargo.
 # npm requires install npm (yikes), cargo requires building from source.
 cargo install taplo-cli --locked
 taplo fmt --check
