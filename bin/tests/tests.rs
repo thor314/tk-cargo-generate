@@ -1,9 +1,13 @@
+#![allow(unused_imports)]
+#![allow(unused_variables)]
+#![allow(dead_code)]
 // Integration tests with rstest. Also see rstest's listed case-enumeration.
 // https://docs.rs/rstest/latest/rstest/#creating-a-test-for-each-combinations-of-given-values
 use arbitrary::Arbitrary;
 use quickcheck_macros::quickcheck;
 use rstest::{fixture, rstest};
 use test_log::test as ltest; // logs in tests, can wrap other test macros
+use log::info;
 
 /// a template of some context to take into functions
 #[derive(Clone, Debug, Eq, PartialEq, Arbitrary)]
@@ -21,7 +25,7 @@ fn workbench() -> Workbench { Workbench { b: true, n: 0 } }
 #[case(1, true, false)]
 #[ltest] // must follow rtest
 fn test_workbench(workbench: Workbench, #[case] n: usize, #[case] b: bool, #[case] out: bool) {
-  tracing::info!("an async test log!");
+  info!("an async test log!");
   let wb = Workbench { n, b };
   let matches = workbench == wb;
   assert_eq!(matches, out);
