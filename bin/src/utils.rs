@@ -2,14 +2,13 @@ use anyhow::Result;
 // use tracing::instrument;
 // use tracing_subscriber::filter::{EnvFilter, LevelFilter};
 
-
 /// Set up crate logging and environment variables.
 pub(crate) fn setup() -> Result<()> {
-  // source .env file
   dotenv::dotenv().ok();
-  // init logger
-  // init_tracing();
   env_logger::init();
+  // init_tracing();
+  // let args = TkCLI::parse();
+  // Ok(args)
   Ok(())
 }
 
@@ -26,4 +25,25 @@ pub(crate) fn setup() -> Result<()> {
 //   //  .with_thread_names(true) // include the name of the current thread
 //   //  .compact(); // use the `Compact` formatting style.
 //   tracing_subscriber::fmt().with_env_filter(filter).init();
+// }
+
+// /// Subcommand-enabled CLI parser
+// #[derive(Parser, Debug)]
+// #[command(name = "tk")]
+// #[command(bin_name = "tk")]
+// pub enum TkCLI {
+//   Testing(TestArgs),
+// }
+
+// /// Simple program to greet a person
+// #[derive(Debug, clap::Args)]
+// #[command(author, version, about, long_about = None)]
+// pub struct TestArgs {
+//   /// Name of the person to greet
+//   #[arg(short, long)]
+//   pub name: String,
+
+//   /// Number of times to greet
+//   #[arg(short, long, default_value_t = 1)]
+//   pub count: u8,
 // }
