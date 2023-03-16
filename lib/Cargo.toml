@@ -7,6 +7,9 @@ name       ="{{project-name}}"
 repository ="https://github.com/thor314/{{project-name}}"
 version    ="0.1.0"
 
+# Two references, besides crates.rs, to look for quick examples:
+# https://github.com/brson/stdx 
+# https://rust-lang-nursery.github.io/rust-cookbook/
 [dependencies]
 anyhow   ="1.0"
 thiserror="1.0"
