@@ -12,6 +12,7 @@ set -euo pipefail # exit immediately if command ends with non-zero exit status.
 
 # lint test fmt 
 rustup default nightly 
+rustup component add clippy
 cargo clippy -- -Dwarnings
 # cargo check
 # cargo test --all-features --verbose
