@@ -2,26 +2,26 @@
 authors    =["{{authors}}"]
 description="""{{description}}"""
 edition    ="2021"
-{% if licensing -%}
+{%- if licensing %}
 license    ="Apache2.0 OR MIT"
-{% endif -%}
+{%- endif %}
 name       ="{{project-name}}"
 repository ="https://github.com/thor314/{{project-name}}"
 version    ="0.1.0"
 
 [dependencies]
 anyhow   ="1.0"
-{% if crate_type == "bin" -%}
+{%- if crate_type == "bin" %}
 thiserror="1.0"
 log       ="0.4" 
-{%- endif -%}
+{%- endif %}
 
 [dev-dependencies]
-{% if crate_type == "lib" -%}
+{%- if crate_type == "lib" %}
 log       ="0.4" 
 {%- endif %}
-criterion ="0.4"
-rstest    ="0.16"         # testing convenience proc-macros
+criterion ="0.5"
+rstest    ="0.18"         # testing convenience proc-macros
 test-log  ="0.2"        # log/tracing independent test-log consumer
 # test-log =  { version = "0.2", default-features = false, features = ["trace"] } 
 
@@ -29,13 +29,13 @@ arbitrary         ={ version = "1.1", features = ["derive"] } # see quickcheck
 quickcheck        ="1.0"      # lowkey proptest suite
 quickcheck_macros ="1" # derive 
 
-{% if itests -%}
+{%- if itests %}
 [[test]]
 name = "integration"
 path = "tests/tests.rs"
 {%- endif %}
 
-{% if benches-%}
+{%- if benches %}
 [[bench]]
 name = "bench"
 harness = false

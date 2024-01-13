@@ -2,8 +2,8 @@ mod demo {
   use arbitrary::Arbitrary;
   use log::info;
   use rstest::{fixture, rstest};
-  use test_log::test as ltest; // enables logging in tests
   // rstest provides features to take common context into tests, and set up small cases testing
+  use test_log::test as ltest; // enables logging in tests
   /// Some context to take into test functions, via `rstest`
   #[derive(Clone, Debug, Eq, PartialEq, Arbitrary)]
   struct TestWorkbench {
@@ -32,7 +32,7 @@ mod demo {
   ) {
     info!("test logged, workbench is {workbench:?}");
     let wb = TestWorkbench { count: n, b };
-    assert_eq!(workbench == wb, expected); // this will fail for some cases
+    assert_eq!(workbench == wb, expected); // this will fail for case_1 cases
   }
 
   // ex 2 - baby fuzz; will generate 2x2 test cases

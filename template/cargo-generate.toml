@@ -56,7 +56,7 @@ ignore = ["APACHE2", "LICENSE-MIT"]
 [conditional.'crate_type == "lib"']
 ignore=["src/main.rs", ".env", "src/error.rs" ]
 [conditional.'crate_type == "bin"']
-ignore=["lib.rs"]
+ignore=["src/lib.rs"]
 
 # unimplemented:
 # [conditional.'crate_type == "bin"'.placeholders]

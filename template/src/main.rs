@@ -4,7 +4,7 @@
 use error::MyError;
 use log::{info, error};
 
-// mod error;
+mod error;
 // #[cfg(test)] mod tests;
 
 fn main() -> Result<(), MyError> {
