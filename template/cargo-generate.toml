@@ -24,26 +24,36 @@ prompt = "What description? "
 type = "bool"
 prompt = "Include licensing?"
 default = true
+[conditional.'!licensing']
+ignore = ["APACHE2", "LICENSE-MIT"]
 
 [placeholders.ci]
 type = "bool"
 prompt = "Include ci?"
 default = true
+[conditional.'!ci']
+ignore = [".github"]
 
 [placeholders.dotfiles]
 type = "bool"
 prompt = "Include dotfiles?"
 default = true
+[conditional.'!dotfiles']
+ignore = [".clippy.toml", ".gitignore", ".taplo.toml", ".rustfmt.toml"]
 
-[placeholders.integration]
+[placeholders.itests]
 type = "bool"
 prompt = "Include integration test harness?"
-default = false
+default = true
+[conditional.'!itests']
+ignore = ["tests"]
 
-[placeholders.bench]
+[placeholders.benches]
 type = "bool"
 prompt = "Include benchmark harness?"
-default = false
+default = true
+[conditional.'!benches']
+ignore = ["benches"]
 
 # conditionals: https://cargo-generate.github.io/cargo-generate/templates/conditional.html
 [conditional.'crate_type == "lib"']

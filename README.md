@@ -1,4 +1,6 @@
-# {{project-name}}
-
-A library generated with [my cargo-generate template](github.com/thor314/tmpl).
-You probably don't want to copy from here.
+# Thor's template for generating Rust repos
+Docs and examples:
+- https://cargo-generate.github.io/cargo-generate/usage.html
+- https://github.com/rust-github/template/tree/main/template
+- https://github.com/esp-rs/esp-idf-template
+- https://github.com/ratatui-org/templates
