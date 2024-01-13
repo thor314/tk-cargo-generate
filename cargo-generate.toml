@@ -12,14 +12,29 @@
 [template]
 cargo_generate_version=">=0.10.0"
 ignore                =["target"] 
-sub_templates = ["licensing", "github_ci", "test_harness", "bench_harness", "lib", "bin"]
+sub_templates         =["licensing", "github_ci", "dotfiles", "test_harness", "bench_harness", "misc", "lib", "bin"]
 
 # placeholders: https://cargo-generate.github.io/cargo-generate/templates/custom_placeholders.html
 [placeholders.description]
 type = "string"
 prompt = "What description? "
 
-[placeholders.integration_test]
+[placeholders.licensing]
+type = "bool"
+prompt = "Include licensing?"
+default = true
+
+[placeholders.ci]
+type = "bool"
+prompt = "Include ci?"
+default = true
+
+[placeholders.dotfiles]
+type = "bool"
+prompt = "Include dotfiles?"
+default = true
+
+[placeholders.integration]
 type = "bool"
 prompt = "Include integration test harness?"
 default = false
