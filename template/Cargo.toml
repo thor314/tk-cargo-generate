@@ -9,12 +9,14 @@ version    ="0.1.0"
 
 [dependencies]
 anyhow   ="1.0"
+{% if crate_type == "bin" -%}
 thiserror="1.0"
-log      ="0.4" 
+{%- endif %}
 
 [dev-dependencies]
+log       ="0.4" 
 criterion = "0.4"
-rstest = "0.16"         # testing convenience proc-macros
+rstest    = "0.16"         # testing convenience proc-macros
 test-log = "0.2"        # log/tracing independent test-log consumer
 # test-log =  { version = "0.2", default-features = false, features = ["trace"] } 
 

@@ -20,13 +20,6 @@ ignore                =["target"]
 type = "string"
 prompt = "What description? "
 
-[placeholders.licensing]
-type = "bool"
-prompt = "Include licensing?"
-default = true
-[conditional.'!licensing']
-ignore = ["APACHE2", "LICENSE-MIT"]
-
 [placeholders.ci]
 type = "bool"
 prompt = "Include ci?"
@@ -44,24 +37,30 @@ ignore = [".clippy.toml", ".gitignore", ".taplo.toml", ".rustfmt.toml"]
 [placeholders.itests]
 type = "bool"
 prompt = "Include integration test harness?"
-default = true
+default = false
 [conditional.'!itests']
 ignore = ["tests"]
 
 [placeholders.benches]
 type = "bool"
 prompt = "Include benchmark harness?"
-default = true
+default = false
 [conditional.'!benches']
 ignore = ["benches"]
 
-# conditionals: https://cargo-generate.github.io/cargo-generate/templates/conditional.html
-[conditional.'crate_type == "lib"']
-ignore=["src/main.rs", ".env"]
-# ignore=["src/main.rs", "src/utils/cli.rs", ".env"]
+[placeholders.licensing]
+type = "bool"
+prompt = "Include licensing?"
+default = false
+[conditional.'!licensing']
+ignore = ["APACHE2", "LICENSE-MIT"]
 
+[conditional.'crate_type == "lib"']
+ignore=["src/main.rs", ".env", "src/error.rs" ]
 [conditional.'crate_type == "bin"']
 ignore=["lib.rs"]
+
+# unimplemented:
 # [conditional.'crate_type == "bin"'.placeholders]
 # cli = { type = "bool", prompt = "include cli tools?", default = false }
 
