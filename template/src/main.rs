@@ -6,13 +6,15 @@ use log::{error, info};
 
 mod error;
 #[cfg(test)] mod tests;
+mod utils;
 
 fn main() -> Result<(), MyError> {
-  if std::env::var("DOTENV_OK").is_ok() {
-    info!("loaded dotenv");
-  } else {
-    error!("failed to load dotenv")
-  }
+  {% if cli %} 
+  let _cli =
+  {%- endif %} 
+  utils::setup()?;
 
+  info!("hello thor");
   Ok(())
 }
+
