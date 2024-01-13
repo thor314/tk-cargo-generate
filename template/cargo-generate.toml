@@ -18,6 +18,9 @@ ignore=["src/main.rs", ".env", "src/error.rs" ]
 [conditional.'crate_type == "bin"']
 ignore=["src/lib.rs"]
 
+[conditional.'crate_type == "bin"'.placeholders]
+cli = { type = "bool", prompt = "include cli tools?", default = false }
+
 # placeholders: https://cargo-generate.github.io/cargo-generate/templates/custom_placeholders.html
 [placeholders.description]
 type = "string"
@@ -64,10 +67,6 @@ prompt = "Include licensing?"
 default = true
 [conditional.'!licensing']
 ignore = ["APACHE2", "LICENSE-MIT"]
-
-# unimplemented:
-# [conditional.'crate_type == "bin"'.placeholders]
-# cli = { type = "bool", prompt = "include cli tools?", default = false }
 
 # run pre/post scripts with https://rhai.rs/book/
 # [hooks]
