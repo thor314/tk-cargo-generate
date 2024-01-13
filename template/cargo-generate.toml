@@ -12,8 +12,6 @@
 [template]
 cargo_generate_version=">=0.10.0"
 ignore                =["target"] 
-# sub_templates         =["lib", "bin"]
-# sub_templates         =["licensing", "github_ci", "dotfiles", "test_harness", "bench_harness", "misc", "lib", "bin"]
 
 # placeholders: https://cargo-generate.github.io/cargo-generate/templates/custom_placeholders.html
 [placeholders.description]
