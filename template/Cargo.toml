@@ -19,7 +19,7 @@ dotenv = "0.15"
 # tracing = "0.1"
 # tracing-subscriber = {version = "0.3", features = ["env-filter"]}
 {% if cli %}
-clap = "4.4"
+clap = {version = "4.4.16", features = ["derive"]}
 {% endif %}
 {%- endif %}
 
