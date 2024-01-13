@@ -3,7 +3,7 @@
 
 use thiserror::Error;
 
-#[derive(Clone, Debug, Error)]
+#[derive(Debug, Error)]
 pub enum MyError {
   // Derive Into<MyError> for io errors
   #[error("My Io error: {0}")]

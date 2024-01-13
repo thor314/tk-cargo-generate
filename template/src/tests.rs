@@ -12,7 +12,7 @@ mod demo {
   }
   // context setup function to be implicitly called by `workbench`
   #[fixture]
-  fn count() -> usize { 0 }
+  fn count() -> usize { return 0usize; }
   // context setup function to be implicitly called by `test_workbench`
   #[fixture]
   fn workbench(#[default(false)] b: bool, count: usize) -> TestWorkbench {
@@ -37,7 +37,9 @@ mod demo {
 
   // ex 2 - baby fuzz; will generate 2x2 test cases
   #[rstest]
-  fn test_enumerative(#[values(0, 4)] n: usize, #[values(7, 8)] m: usize) { assert!(n < m) }
+  fn test_enumerative(#[values(0, 4)] n: usize, #[values(7, 8)] m: usize) {
+    assert!(n < m);
+  }
 
   // fuzz test
   fn reverse<T: Clone>(xs: &[T]) -> Vec<T> {
