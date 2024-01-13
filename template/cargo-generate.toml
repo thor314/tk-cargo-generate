@@ -13,50 +13,57 @@
 cargo_generate_version=">=0.10.0"
 ignore                =["target"] 
 
+[conditional.'crate_type == "lib"']
+ignore=["src/main.rs", ".env", "src/error.rs" ]
+[conditional.'crate_type == "bin"']
+ignore=["src/lib.rs"]
+
 # placeholders: https://cargo-generate.github.io/cargo-generate/templates/custom_placeholders.html
 [placeholders.description]
 type = "string"
 prompt = "What description? "
 
-[placeholders.ci]
+[placeholders.advanced]
+type = "bool"
+prompt = "Advanced configuration?"
+default = false
+[conditional.'!advanced']
+ignore = ["tests", "benches", "APACHE2", "LICENSE-MIT"]
+
+[placeholders.'advanced'.ci]
 type = "bool"
 prompt = "Include ci?"
 default = true
-[conditional.'!ci']
+[conditional.'advanced'.'!ci']
 ignore = [".github"]
 
-[placeholders.dotfiles]
+[placeholders.'advanced'.dotfiles]
 type = "bool"
 prompt = "Include dotfiles?"
 default = true
-[conditional.'!dotfiles']
+[conditional.'advanced'.'!dotfiles']
 ignore = [".clippy.toml", ".gitignore", ".taplo.toml", ".rustfmt.toml"]
 
-[placeholders.itests]
+[placeholders.'advanced'.itests]
 type = "bool"
 prompt = "Include integration test harness?"
-default = false
-[conditional.'!itests']
+default = true
+[conditional.'advanced'.'!itests']
 ignore = ["tests"]
 
-[placeholders.benches]
+[placeholders.'advanced'.benches]
 type = "bool"
 prompt = "Include benchmark harness?"
-default = false
+default = true
 [conditional.'!benches']
 ignore = ["benches"]
 
-[placeholders.licensing]
+[placeholders.'advanced'.licensing]
 type = "bool"
 prompt = "Include licensing?"
-default = false
+default = true
 [conditional.'!licensing']
 ignore = ["APACHE2", "LICENSE-MIT"]
-
-[conditional.'crate_type == "lib"']
-ignore=["src/main.rs", ".env", "src/error.rs" ]
-[conditional.'crate_type == "bin"']
-ignore=["src/lib.rs"]
 
 # unimplemented:
 # [conditional.'crate_type == "bin"'.placeholders]
