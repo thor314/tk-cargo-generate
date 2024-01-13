@@ -11,9 +11,8 @@
 
 [template]
 cargo_generate_version=">=0.10.0"
-# don't include any files/directories in the following list:
-ignore                =["target"]
-# sub_templates = ["licensing", "github_ci", "test_harness", "bench_harness", "lib", "bin"]
+ignore                =["target"] 
+sub_templates = ["licensing", "github_ci", "test_harness", "bench_harness", "lib", "bin"]
 
 # placeholders: https://cargo-generate.github.io/cargo-generate/templates/custom_placeholders.html
 [placeholders.description]
