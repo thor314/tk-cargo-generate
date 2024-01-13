@@ -1,4 +1,4 @@
-# Templates for personal use
-Problem: I want to set up a repo with nice things, with a CLI like `cargo new`, but with all the common tools I reach for. 
+# {{project-name}}
 
-I want to set these things up *once.*
+A library generated with [my cargo-generate template](github.com/thor314/tmpl).
+You probably don't want to copy from here.
