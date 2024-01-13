@@ -10,7 +10,7 @@
 # -   `{{is_init}}` - buggy; reflects value of `--init` flag; `--init`: drop template in place
 
 [template]
-cargo_generate_version=">=0.10.0"
+cargo_generate_version = ">=0.17.4"
 ignore                =["target"] 
 
 [conditional.'crate_type == "lib"']
