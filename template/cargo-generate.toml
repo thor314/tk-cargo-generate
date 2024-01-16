@@ -14,7 +14,7 @@ cargo_generate_version = ">=0.17.4"
 ignore                =["target"] 
 
 [conditional.'crate_type == "lib"']
-ignore=["src/main.rs", ".env", "src/error.rs" ]
+ignore=["src/main.rs", ".env", "src/error.rs", "src/utils.rs" ]
 [conditional.'crate_type == "bin"']
 ignore=["src/lib.rs"]
 
