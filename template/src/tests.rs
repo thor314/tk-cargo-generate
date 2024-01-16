@@ -1,12 +1,10 @@
 mod demo {
   use arbitrary::Arbitrary;
-  use log::info;
+  use log::debug;
   use rstest::{fixture, rstest};
   // rstest provides features to take common context into tests, and set up small cases testing
-  use test_log::test as ltest; // enables logging in tests
-  /// Some context to take into test functions, via `rstest`
   #[derive(Clone, Debug, Eq, PartialEq, Arbitrary)]
-  struct TestWorkbench {
+  struct Wb {
     b:     bool,
     count: usize,
   }
@@ -15,24 +13,25 @@ mod demo {
   fn count() -> usize { return 0usize; }
   // context setup function to be implicitly called by `test_workbench`
   #[fixture]
-  fn workbench(#[default(false)] b: bool, count: usize) -> TestWorkbench {
-    TestWorkbench { b, count }
+  fn wb(#[default(false)] b: bool, count: usize) -> Wb {
+    let _ = env_logger::builder().is_test(true).try_init();
+    Wb { b, count }
   }
 
   // small-cases fuzzing
-  #[rstest] // argument workbench will inherit the above function if names match; will generate 3x3 case-tests
+  // argument workbench will inherit the above function if names match; will generate 3x3 case-tests
+  #[rstest] 
   #[case(0, true, true)]
   #[case(1, true, false)]
-  #[ltest] // must follow rstest
   fn test_workbench(
-    workbench: TestWorkbench,
+    wb: Wb
     #[case] n: usize,
     #[case] b: bool,
     #[case] expected: bool,
   ) {
     info!("test logged, workbench is {workbench:?}");
-    let wb = TestWorkbench { count: n, b };
-    assert_eq!(workbench == wb, expected); // this will fail for case_1 cases
+    let wb_ = Wb { count: n, b };
+    assert_eq!(wb == wb_, expected); // this will fail for case_1 cases
   }
 
   // ex 2 - baby fuzz; will generate 2x2 test cases
