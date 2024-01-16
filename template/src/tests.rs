@@ -14,7 +14,7 @@ mod demo {
   // context setup function to be implicitly called by `test_workbench`
   #[fixture]
   fn wb(#[default(false)] b: bool, count: usize) -> Wb {
-    let _ = env_logger::builder().is_test(true).try_init();
+    let _ = env_logger::builder().filter_level(log::LevelFilter::Debug).is_test(true).try_init();
     Wb { b, count }
   }
 
