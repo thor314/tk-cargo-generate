@@ -8,10 +8,10 @@ mod demo {
     b:     bool,
     count: usize,
   }
-  // context setup function to be implicitly called by `workbench`
+  // context setup function to be implicitly called by `wb`
   #[fixture]
   fn count() -> usize { return 0usize; }
-  // context setup function to be implicitly called by `test_workbench`
+  // context setup function to be implicitly called by `test_wb`
   #[fixture]
   fn wb(#[default(false)] b: bool, count: usize) -> Wb {
     let _ = env_logger::builder().filter_level(log::LevelFilter::Debug).is_test(true).try_init();
@@ -19,17 +19,17 @@ mod demo {
   }
 
   // small-cases fuzzing
-  // argument workbench will inherit the above function if names match; will generate 3x3 case-tests
+  // argument wb will inherit the above function if names match; will generate 3x3 case-tests
   #[rstest] 
   #[case(0, true, true)]
   #[case(1, true, false)]
-  fn test_workbench(
+  fn test_wb(
     wb: Wb,
     #[case] n: usize,
     #[case] b: bool,
     #[case] expected: bool,
   ) {
-    info!("test logged, workbench is {workbench:?}");
+    info!("test logged, workbench is {wb:?}");
     let wb_ = Wb { count: n, b };
     assert_eq!(wb == wb_, expected); // this will fail for case_1 cases
   }
