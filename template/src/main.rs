@@ -13,12 +13,26 @@ mod error;
 mod utils;
 
 fn main() -> Result<(), MyError> {
-  {% if cli %} 
-  let _cli =
-  {%- endif %} 
-  utils::setup()?;
-
+  let _cli = utils::setup()?;
   info!("hello thor");
+
   Ok(())
 }
+// {% if cli %}
+// mod cli;
 
+// fn main() -> Result<(), MyError> {
+//   let _cli = utils::setup()?;
+//   info!("hello thor");
+
+//   Ok(())
+// }
+// {% else %}
+// fn main() -> Result<(), MyError> {
+//   utils::setup()?;
+//   info!("hello thor");
+
+//   Ok(())
+// }
+
+// {% endif %}

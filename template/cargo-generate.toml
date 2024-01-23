@@ -14,12 +14,10 @@ cargo_generate_version = ">=0.17.4"
 ignore                =["target"] 
 
 [conditional.'crate_type == "lib"']
-ignore=["src/main.rs", ".env", "src/error.rs", "src/utils.rs" ]
+ignore=["src/main.rs", ".env", "src/error.rs", "src/utils.rs", "src/cli.rs" ]
+
 [conditional.'crate_type == "bin"']
 ignore=["src/lib.rs"]
-
-[conditional.'crate_type == "bin"'.placeholders]
-cli = { type = "bool", prompt = "include cli tools?", default = false }
 
 # placeholders: https://cargo-generate.github.io/cargo-generate/templates/custom_placeholders.html
 [placeholders.description]
@@ -33,40 +31,29 @@ default = false
 [conditional.'!advanced']
 ignore = ["tests", "benches", "APACHE2", "LICENSE-MIT"]
 
-[placeholders.'advanced'.ci]
-type = "bool"
-prompt = "Include ci?"
-default = true
-[conditional.'advanced'.'!ci']
+[conditional.'crate_type == "bin"'.placeholders]
+# cli = {type = "bool", prompt = "Include cli tools?", default = false}
+
+[conditional.'advanced'.placeholders]
+ci = {type = "bool", prompt = "Include ci?", default = true}
+tracing = {type = "bool", prompt = "Include tracing?", default = false}
+dotfiles = { type = "bool", prompt = "Include dotfiles?", default = true }
+itests = {type = "bool", prompt = "Include integration test harness?", default = true}
+benches = {type = "bool", prompt = "Include benchmark harness?", default = true}
+licensing = {type = "bool", prompt = "Include licensing?", default = true}
+
+[conditional.'!ci']
 ignore = [".github"]
-
-[placeholders.'advanced'.dotfiles]
-type = "bool"
-prompt = "Include dotfiles?"
-default = true
-[conditional.'advanced'.'!dotfiles']
+[conditional.'!dotfiles']
 ignore = [".clippy.toml", ".gitignore", ".taplo.toml", ".rustfmt.toml"]
-
-[placeholders.'advanced'.itests]
-type = "bool"
-prompt = "Include integration test harness?"
-default = true
-[conditional.'advanced'.'!itests']
+[conditional.'!itests']
 ignore = ["tests"]
-
-[placeholders.'advanced'.benches]
-type = "bool"
-prompt = "Include benchmark harness?"
-default = true
 [conditional.'!benches']
 ignore = ["benches"]
-
-[placeholders.'advanced'.licensing]
-type = "bool"
-prompt = "Include licensing?"
-default = true
 [conditional.'!licensing']
 ignore = ["APACHE2", "LICENSE-MIT"]
+# [conditional.'!cli']
+# ignore = ["src/cli.rs"]
 
 # run pre/post scripts with https://rhai.rs/book/
 # [hooks]

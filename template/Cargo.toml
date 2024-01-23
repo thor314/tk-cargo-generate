@@ -2,7 +2,7 @@
 authors    =["{{authors}}"]
 description="""{{description}}"""
 edition    ="2021"
-{% if licensing %}
+{% if licensing -%}
 license    ="Apache2.0 OR MIT"
 {%- endif %}
 name       ="{{project-name}}"
@@ -12,19 +12,21 @@ version    ="0.1.0"
 [dependencies]
 anyhow   ="1.0"
 log       ="0.4" 
+{% if tracing -%}
+tracing = "0.1"
+tracing-subscriber = {version = "0.3", features = ["env-filter"]}
+{% endif -%}
 {% if crate_type == "bin" %}
 thiserror="1.0"
 env_logger = "0.10"
 dotenv = "0.15"
-# tracing = "0.1"
-# tracing-subscriber = {version = "0.3", features = ["env-filter"]}
+{%- endif %}
 {% if cli %}
 clap = {version = "4.4.16", features = ["derive"]}
-{% endif %}
 {%- endif %}
 
 [dev-dependencies]
-{% if crate_type == "lib" %}
+{% if crate_type == "lib" -%}
 env_logger="0.10"
 {% endif %}
 criterion ="0.5"
