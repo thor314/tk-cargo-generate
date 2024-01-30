@@ -32,7 +32,7 @@ default = false
 ignore = ["tests", "benches", "APACHE2", "LICENSE-MIT"]
 
 [conditional.'crate_type == "bin"'.placeholders]
-# cli = {type = "bool", prompt = "Include cli tools?", default = false}
+cli = {type = "bool", prompt = "Include cli tools?", default = false}
 
 [conditional.'advanced'.placeholders]
 ci = {type = "bool", prompt = "Include ci?", default = true}
@@ -52,8 +52,8 @@ ignore = ["tests"]
 ignore = ["benches"]
 [conditional.'!licensing']
 ignore = ["APACHE2", "LICENSE-MIT"]
-# [conditional.'!cli']
-# ignore = ["src/cli.rs"]
+[conditional.'!cli']
+ignore = ["src/cli.rs"]
 
 # run pre/post scripts with https://rhai.rs/book/
 # [hooks]

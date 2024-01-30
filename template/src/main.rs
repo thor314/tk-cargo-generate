@@ -11,6 +11,8 @@ use log::{error, info};
 mod error;
 #[cfg(test)] mod tests;
 mod utils;
+{%- if cli %}
+mod cli;
 
 fn main() -> Result<(), MyError> {
   let _cli = utils::setup()?;
@@ -18,21 +20,11 @@ fn main() -> Result<(), MyError> {
 
   Ok(())
 }
-// {% if cli %}
-// mod cli;
+{% else %}
+fn main() -> Result<(), MyError> {
+  utils::setup()?;
+  info!("hello thor");
 
-// fn main() -> Result<(), MyError> {
-//   let _cli = utils::setup()?;
-//   info!("hello thor");
-
-//   Ok(())
-// }
-// {% else %}
-// fn main() -> Result<(), MyError> {
-//   utils::setup()?;
-//   info!("hello thor");
-
-//   Ok(())
-// }
-
-// {% endif %}
+  Ok(())
+}
+{% endif %}
