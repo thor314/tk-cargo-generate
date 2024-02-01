@@ -2,25 +2,27 @@ use anyhow::{anyhow, Result};
 use log::trace;
 
 use crate::error::MyError;
-
 {% if cli -%}
 use clap::Parser;
-use crate::cli::Cli;
+use crate::cli::MyArgs;
+// or:
+// use crate::cli::subcommand::SubcommandArgs;
 
 /// Set up crate logging and environment variables.
-pub(crate) fn setup() -> Result<Cli, MyError> {
+pub(crate) fn setup() -> Result<MyArgs, MyError> {
   dotenv::dotenv().ok();
-  // init_tracing(); 
-  env_logger::init();
+  // init_tracing();
+  let args = MyArgs::parse();
   if std::env::var("DOTENV_OK").is_ok() {
     trace!("loaded dotenv");
   } else {
     return Err(anyhow!("failed to load dotenv").into());
   }
+  env_logger::builder().filter_level(args.log_level()).build();
 
-  let args = Cli::parse();
   Ok(args)
 }
+
 {% else %}
 /// Set up crate logging and environment variables.
 pub(crate) fn setup() -> Result<(), MyError> {
@@ -38,6 +40,7 @@ pub(crate) fn setup() -> Result<(), MyError> {
 {%- endif -%}
 
 {% if tracing -%}
+// todo: doesn't feature onto what we've done with clap args yet
 /// Set up the tracing filter level using the env value, or else set it here. Reads RUST_LOG.
 /// TRACE < DEBUG < INFO < WARN < ERROR
 #[tracing::instrument]
