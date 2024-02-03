@@ -1,5 +1,5 @@
 use clap::{ArgAction, Args, Parser};
-use log::LevelFilter;
+use log::{debug, trace, LevelFilter};
 
 #[derive(Parser, Debug)]
 #[command(name = "tk")]
@@ -13,6 +13,10 @@ pub struct MyArgs {
 }
 
 impl MyArgs {
+  pub fn handle(&self) {
+    trace!("handling MyArgs");
+  }
+
   /// in decreasing order of priority:
   /// if verbosity is specified from command line, e.g. `-v` or `-vv`, use that
   /// if a `RUST_LOG` env var is set, use that
@@ -51,6 +55,13 @@ pub(crate) mod subcommand {
         SubcommandArgs::First(subcommand) => subcommand,
       } {
         pub fn log_level(&self) -> LevelFilter;
+      }
+    }
+
+    pub fn handle(&self) {
+      trace!("handling subcommands...");
+      match self {
+        SubcommandArgs::First(c) => c.handle(),
       }
     }
   }

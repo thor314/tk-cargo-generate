@@ -6,7 +6,7 @@ use crate::error::MyError;
 use clap::Parser;
 use crate::cli::MyArgs;
 // or:
-// use crate::cli::subcommand::SubcommandArgs;
+// use crate::{cli::subcommand::SubcommandArgs as MyArgs, error::MyError};
 
 /// Set up crate logging and environment variables.
 pub(crate) fn setup() -> Result<MyArgs, MyError> {
