@@ -1,10 +1,12 @@
+//! https://docs.rs/clap/latest/clap/
+
 use clap::{ArgAction, Args, Parser};
 use log::{debug, trace, LevelFilter};
 
 #[derive(Parser, Debug)]
-#[command(name = "tk")]
-#[command(bin_name = "tk")]
-#[clap(about = "tk does things")]
+#[command(name = "{{crate_name}}")]
+#[command(bin_name = "{{crate_name}}")]
+#[clap(about = "{{crate_name}} cli")]
 #[command(author, version, long_about = None)]
 pub struct MyArgs {
   /// Set the verbosity. Use -v for DEBUG, -vv for TRACE. None for INFO.
@@ -39,12 +41,11 @@ impl MyArgs {
 pub(crate) mod subcommand {
   use super::*;
 
-  // https://docs.rs/clap/latest/clap/
-  /// CLI parser
+  /// CLI parser with subcommands
   #[derive(Parser, Debug)]
-  #[command(name = "tk")]
-  #[command(bin_name = "tk")]
-  #[clap(about = "tk does things")]
+  #[command(name = "{{crate_name}}")]
+  #[command(bin_name = "{{crate_name}}")]
+  #[clap(about = "{{crate_name}} cli")]
   pub enum SubcommandArgs {
     First(MyArgs),
   }
