@@ -11,9 +11,12 @@ version    ="0.1.0"
 
 [dependencies]
 anyhow   ="1.0"
+cute = "0.3.0"
 {% if async -%}
 tracing = "0.1"
 tracing-subscriber={ version="0.3", features=["env-filter", "fmt"] }
+tokio = { version = "1", features = ["full"] }
+futures = "0.3" 
 {% else -%}
 log       ="0.4" 
 {% endif -%}

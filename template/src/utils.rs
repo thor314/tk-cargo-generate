@@ -23,7 +23,7 @@ use crate::cli::MyArgs;
       let filter = EnvFilter::builder()
         .with_default_directive(args.log_level().into())
         .from_env_lossy();
-      tracing_subscriber::registry().with(filter).init();
+      tracing_subscriber::fmt().with_env_filter(filter).init();
     {% else -%}
       env_logger::builder().filter_level(args.log_level()).build();
     {% endif -%}
@@ -34,7 +34,7 @@ use crate::cli::MyArgs;
       let filter = EnvFilter::builder()
         .with_default_directive(LevelFilter::INFO.into())
         .from_env_lossy();
-      tracing_subscriber::registry().with(filter).init();
+      tracing_subscriber::fmt().with_env_filter(filter).init();
     {% else -%}
       env_logger::init();
     {% endif -%}

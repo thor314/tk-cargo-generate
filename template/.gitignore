@@ -20,4 +20,5 @@ Cargo.lock
 dump
 
 ### VIM ###
-[._]*.sw[a-p]
+*.swp
+*.swo

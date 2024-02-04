@@ -15,11 +15,10 @@ mod utils;
 {% else -%} use log::info;
 {% endif %}
 
-fn main() -> Result<(), MyError> {
+{% if async -%} #[tokio::main] async {% endif %} fn main() -> Result<(), MyError> {
   {% if cli %} let _cli = {% endif %}
   utils::setup()?;
   info!("hello thor"); 
-
 
   Ok(())
 }
