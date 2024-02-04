@@ -31,16 +31,16 @@ default = false
 [conditional.'!advanced']
 ignore = ["tests", "benches", "APACHE2", "LICENSE-MIT"]
 
-[conditional.'crate_type == "bin"'.placeholders]
+[conditional.'crate_type == "bin"'.placeholders] 
 cli = {type = "bool", prompt = "Include cli tools?", default = false}
 
 [conditional.'advanced'.placeholders]
 ci = {type = "bool", prompt = "Include ci?", default = true}
-async = {type = "bool", prompt = "async?", default = false}
 dotfiles = { type = "bool", prompt = "Include dotfiles?", default = true }
-itests = {type = "bool", prompt = "Include integration test harness?", default = true}
-benches = {type = "bool", prompt = "Include benchmark harness?", default = true}
 licensing = {type = "bool", prompt = "Include licensing?", default = true}
+async = {type = "bool", prompt = "async?", default = false}
+itests = {type = "bool", prompt = "Include integration test harness?", default = false}
+benches = {type = "bool", prompt = "Include benchmark harness?", default = false}
 
 [conditional.'!ci']
 ignore = [".github"]

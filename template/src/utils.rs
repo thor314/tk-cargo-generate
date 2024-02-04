@@ -1,61 +1,50 @@
 use anyhow::{anyhow, Result};
-use log::trace;
+{% if async -%} 
+use tracing_subscriber::{filter::{EnvFilter, LevelFilter}, layer::SubscriberExt, util::SubscriberInitExt};
+use tracing::trace;
+{% else -%} log::trace;
+{% endif %}
 
 use crate::error::MyError;
 {% if cli -%}
 use clap::Parser;
 use crate::cli::MyArgs;
-// or:
 // use crate::{cli::subcommand::SubcommandArgs as MyArgs, error::MyError};
+{% endif -%}
+
 
 /// Set up crate logging and environment variables.
-pub(crate) fn setup() -> Result<MyArgs, MyError> {
-  dotenv::dotenv().ok();
-  // init_tracing();
-  let args = MyArgs::parse();
-  if std::env::var("DOTENV_OK").is_ok() {
-    trace!("loaded dotenv");
-  } else {
-    return Err(anyhow!("failed to load dotenv").into());
-  }
-  env_logger::builder().filter_level(args.log_level()).build();
-
-  Ok(args)
-}
-
+// #[tracing::instrument]
+{% if cli -%}
+  pub(crate) fn setup() -> Result<MyArgs, MyError> {
+    dotenv::dotenv().ok();
+    let args = MyArgs::parse();
+    {% if async -%}
+      let filter = EnvFilter::builder()
+        .with_default_directive(args.log_level().into())
+        .from_env_lossy();
+      tracing_subscriber::registry().with(filter).init();
+    {% else -%}
+      env_logger::builder().filter_level(args.log_level()).build();
+    {% endif -%}
 {% else -%}
-/// Set up crate logging and environment variables.
-pub(crate) fn setup() -> Result<(), MyError> {
-  dotenv::dotenv().ok();
-  {% if async -%} init_tracing();  {% else -%}
-  env_logger::init();
-  {% endif -%}
+  pub(crate) fn setup() -> Result<(), MyError> {
+    dotenv::dotenv().ok();
+    {% if async -%} 
+      let filter = EnvFilter::builder()
+        .with_default_directive(LevelFilter::INFO.into())
+        .from_env_lossy();
+      tracing_subscriber::registry().with(filter).init();
+    {% else -%}
+      env_logger::init();
+    {% endif -%}
+{% endif %}
+
   if std::env::var("DOTENV_OK").is_ok() {
     trace!("loaded dotenv");
   } else {
     return Err(anyhow!("failed to load dotenv").into());
   }
 
-  Ok(())
+  {% if cli %} Ok(args) {% else %} Ok(()) {% endif %}
 }
-{% endif -%}
-
-{% if async -%}
-// todo: doesn't feature onto what we've done with clap args yet
-/// Set up the tracing filter level using the env value, or else set it here. Reads RUST_LOG.
-/// TRACE < DEBUG < INFO < WARN < ERROR
-#[tracing::instrument]
-pub(crate) fn init_tracing() {
-  // todo: env-logger
-  let filter = tracing::level_filters::LevelFilter::INFO.into();
-  // set level to RUST_LOG env variable, or else INFO
-  let filter =
-    tracing_subscriber::EnvFilter::builder().with_default_directive(filter).from_env_lossy();
-  //  .with_level(false) // don't include levels in formatted output
-  //  .with_target(false) // don't include targets
-  //  .with_thread_ids(true) // include the thread ID of the current thread
-  //  .with_thread_names(true) // include the name of the current thread
-  //  .compact(); // use the `Compact` formatting style.
-  tracing_subscriber::fmt().with_env_filter(filter).init();
-}
-{% endif -%}

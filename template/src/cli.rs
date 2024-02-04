@@ -1,7 +1,12 @@
 //! https://docs.rs/clap/latest/clap/
 
 use clap::{ArgAction, Args, Parser};
+{% if async -%}
+use tracing::{debug, trace};
+use tracing_subscriber::filter::{LevelFilter, EnvFilter};
+{% else -%}
 use log::{debug, trace, LevelFilter};
+{% endif -%}
 
 #[derive(Parser, Debug)]
 #[command(name = "{{crate_name}}")]
@@ -26,13 +31,13 @@ impl MyArgs {
   pub fn log_level(&self) -> LevelFilter {
     if self.verbosity > 0 {
       match self.verbosity {
-        1 => LevelFilter::Debug,
-        _ => LevelFilter::Trace,
+        1 =>  {% if async %} LevelFilter::DEBUG, {% else %} LevelFilter::Debug, {% endif %}
+        _ =>  {% if async %} LevelFilter::TRACE, {% else %} LevelFilter::Trace, {% endif %}
       }
     } else if let Ok(s) = std::env::var("RUST_LOG") {
       s.parse().expect("RUST_LOG environment invalid value")
     } else {
-      LevelFilter::Info
+      {% if async %} LevelFilter::INFO {% else %} LevelFilter::Info {% endif %}
     }
   }
 }

@@ -4,4 +4,4 @@
 #![allow(unreachable_code)]
 #![allow(non_snake_case)]
 #![allow(clippy::clone_on_copy)]
-// #[cfg(test)] mod tests;
+#[cfg(test)] mod tests;
