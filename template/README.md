@@ -2,7 +2,7 @@
 <!-- [![Crates.io](https://img.shields.io/crates/v/{{project-name}}.svg)](https://crates.io/crates/{{project-name}}) -->
 <!-- [![Docs.rs](https://docs.rs/{{project-name}}/badge.svg)](https://docs.rs/{{project-name}}) -->
 {% if ci -%}
-![CI](https://github.com/thor314/{{project-name}}/workflows/CI/badge.svg)
+![](https://github.com/thor314/{{project-name}}/actions/workflows/ci/badge.svg)
 {% endif -%}
 
 ## Installation
