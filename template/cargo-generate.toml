@@ -11,7 +11,8 @@
 
 [template]
 cargo_generate_version = ">=0.17.4"
-ignore                =["target"] 
+ignore                 =["target", "*.swp", "*.swo"]
+gh = "thor314"
 
 [conditional.'crate_type == "lib"']
 ignore=["src/main.rs", ".env", "src/error.rs", "src/utils.rs", "src/cli.rs" ]
@@ -26,13 +27,13 @@ prompt = "What description? "
 
 [placeholders.advanced]
 type = "bool"
-prompt = "Advanced configuration?"
+prompt = "Advanced configuration? "
 default = false
 [conditional.'!advanced']
 ignore = ["tests", "benches", "APACHE2", "LICENSE-MIT"]
 
 [conditional.'crate_type == "bin"'.placeholders] 
-cli = {type = "bool", prompt = "Include cli tools?", default = false}
+cli = {type = "bool", prompt = "Include cli tools? ", default = false}
 
 [conditional.'advanced'.placeholders]
 ci = {type = "bool", prompt = "Include ci?", default = true}

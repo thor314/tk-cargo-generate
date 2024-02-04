@@ -2,7 +2,7 @@ use anyhow::{anyhow, Result};
 {% if async -%} 
 use tracing_subscriber::{filter::{EnvFilter, LevelFilter}, layer::SubscriberExt, util::SubscriberInitExt};
 use tracing::trace;
-{% else -%} log::trace;
+{% else -%} use log::trace;
 {% endif %}
 
 use crate::error::MyError;
