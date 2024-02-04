@@ -12,7 +12,6 @@
 [template]
 cargo_generate_version = ">=0.17.4"
 ignore                 =["target", "*.swp", "*.swo"]
-gh = "thor314"
 
 [conditional.'crate_type == "lib"']
 ignore=["src/main.rs", ".env", "src/error.rs", "src/utils.rs", "src/cli.rs" ]

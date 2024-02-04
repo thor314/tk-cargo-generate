@@ -1,7 +1,9 @@
 # {{project-name}}
 <!-- [![Crates.io](https://img.shields.io/crates/v/{{project-name}}.svg)](https://crates.io/crates/{{project-name}}) -->
 <!-- [![Docs.rs](https://docs.rs/{{project-name}}/badge.svg)](https://docs.rs/{{project-name}}) -->
-[![CI](https://github.com/thor314/{{project-name}}/workflows/CI/badge.svg)](https://github.com/thor314/{{project-name}}/actions)
+{% if ci -%}
+![CI](https://github.com/thor314/{{project-name}}/workflows/CI/badge.svg)
+{% endif -%}
 
 ## Installation
 ### Cargo
