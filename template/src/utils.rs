@@ -23,12 +23,13 @@ pub(crate) fn setup() -> Result<MyArgs, MyError> {
   Ok(args)
 }
 
-{% else %}
+{% else -%}
 /// Set up crate logging and environment variables.
 pub(crate) fn setup() -> Result<(), MyError> {
   dotenv::dotenv().ok();
-  // init_tracing(); 
+  {% if async -%} init_tracing();  {% else -%}
   env_logger::init();
+  {% endif -%}
   if std::env::var("DOTENV_OK").is_ok() {
     trace!("loaded dotenv");
   } else {
@@ -37,9 +38,9 @@ pub(crate) fn setup() -> Result<(), MyError> {
 
   Ok(())
 }
-{%- endif -%}
+{% endif -%}
 
-{% if tracing -%}
+{% if async -%}
 // todo: doesn't feature onto what we've done with clap args yet
 /// Set up the tracing filter level using the env value, or else set it here. Reads RUST_LOG.
 /// TRACE < DEBUG < INFO < WARN < ERROR

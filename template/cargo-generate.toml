@@ -36,7 +36,7 @@ cli = {type = "bool", prompt = "Include cli tools?", default = false}
 
 [conditional.'advanced'.placeholders]
 ci = {type = "bool", prompt = "Include ci?", default = true}
-tracing = {type = "bool", prompt = "Include tracing?", default = false}
+async = {type = "bool", prompt = "async?", default = false}
 dotfiles = { type = "bool", prompt = "Include dotfiles?", default = true }
 itests = {type = "bool", prompt = "Include integration test harness?", default = true}
 benches = {type = "bool", prompt = "Include benchmark harness?", default = true}

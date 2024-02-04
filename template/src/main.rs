@@ -11,7 +11,7 @@ use log::{error, info};
 mod error;
 #[cfg(test)] mod tests;
 mod utils;
-{%- if cli %}
+{% if cli -%}
 mod cli;
 
 fn main() -> Result<(), MyError> {
@@ -20,11 +20,11 @@ fn main() -> Result<(), MyError> {
 
   Ok(())
 }
-{% else %}
+{% else -%}
 fn main() -> Result<(), MyError> {
   utils::setup()?;
   info!("hello thor");
 
   Ok(())
 }
-{% endif %}
+{% endif -%}
