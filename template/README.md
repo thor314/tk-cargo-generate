@@ -1,4 +1,5 @@
 # {{project-name}}
+![](https://img.shields.io/badge/made_by_cryptograthor-black?style=flat&logo=undertale&logoColor=hotpink)
 {% if ci -%}
 ![](https://github.com/thor314/{{project-name}}/actions/workflows/ci/badge.svg)
 <!-- [![crates.io](https://img.shields.io/crates/v/{{project-name}}.svg)](https://crates.io/crates/{{project-name}}) -->
