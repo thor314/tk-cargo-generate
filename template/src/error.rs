@@ -8,6 +8,8 @@ pub enum MyError {
   // Derive Into<MyError> for io errors
   #[error("My Io error: {0}")]
   Io(#[from] std::io::Error),
+  #[error("My Io error: {0}")]
+  Dotenv(#[from] dotenv::Error),
   // Derive Into<MyError> for anyhow errors
   #[error(transparent)]
   Anyhow(#[from] anyhow::Error),
