@@ -16,7 +16,7 @@ use crate::cli::MyArgs;
 // #[tracing::instrument]
 {% if cli -%}
   pub(crate) fn setup() -> Result<MyArgs, MyError> {
-    dotenv::dotenv().ok();
+    dotenvy::dotenv().ok();
     let args = MyArgs::parse();
     {% if async -%}
       let filter = EnvFilter::builder()
@@ -28,7 +28,7 @@ use crate::cli::MyArgs;
     {% endif -%}
 {% else -%}
   pub(crate) fn setup() -> Result<(), MyError> {
-    dotenv::dotenv().ok();
+    dotenvy::dotenv().ok();
     {% if async -%} 
       let filter = EnvFilter::builder()
         .with_default_directive(LevelFilter::INFO.into())
