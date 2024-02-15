@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Result};
+use anyhow::{anyhow, Context};
 {% if async -%} 
 use tracing_subscriber::{filter::{EnvFilter, LevelFilter}, layer::SubscriberExt, util::SubscriberInitExt};
 use tracing::trace;
@@ -13,10 +13,11 @@ use crate::cli::MyArgs;
 {% endif -%}
 
 /// Set up crate logging and environment variables.
-// #[tracing::instrument]
 {% if cli -%}
-  pub(crate) fn setup() -> Result<MyArgs, MyError> {
-    dotenvy::dotenv().ok();
+  pub(crate) fn setup(
+    {% if server -%} secret_store: shuttle_secrets::SecretStore {% endif -%}
+  ) -> Result<MyArgs, MyError> {
+    {% if !server -%} dotenvy::dotenv().ok(); {% endif -%}
     let args = MyArgs::parse();
     {% if async -%}
       let filter = EnvFilter::builder()
@@ -37,13 +38,10 @@ use crate::cli::MyArgs;
     {% else -%}
       env_logger::init();
     {% endif -%}
-{% endif %}
+{% endif -%}
 
-  if std::env::var("DOTENV_OK").is_ok() {
-    trace!("loaded dotenv");
-  } else {
-    return Err(anyhow!("failed to load dotenv").into());
-  }
+  {% if server -%} secret_store.get("DOTENV_OK").unwrap(); {% else -%} 
+  std::env::var("DOTENV_OK").with_context(|| anyhow!("failed to load dotenv"))?; {% endif -%}
 
   {% if cli %} Ok(args) {% else %} Ok(()) {% endif %}
 }
