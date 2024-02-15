@@ -9,7 +9,7 @@ pub enum MyError {
   #[error("My Io error: {0}")]
   Io(#[from] std::io::Error),
   #[error("My Io error: {0}")]
-  Dotenv(#[from] dotenv::Error),
+  Dotenv(#[from] dotenvy::Error),
   // Derive Into<MyError> for anyhow errors
   #[error(transparent)]
   Anyhow(#[from] anyhow::Error),
