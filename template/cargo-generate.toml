@@ -38,9 +38,9 @@ cli = {type = "bool", prompt = "Include cli tools? ", default = false}
 ci = {type = "bool", prompt = "Include ci?", default = true}
 # dotfiles = { type = "bool", prompt = "Include dotfiles?", default = true }
 licensing = {type = "bool", prompt = "Include licensing?", default = true}
-async = {type = "bool", prompt = "async?", default = false}
 itests = {type = "bool", prompt = "Include integration test harness?", default = false}
 benches = {type = "bool", prompt = "Include benchmark harness?", default = false}
+async = {type = "bool", prompt = "async?", default = false}
 server = {type = "bool", prompt = "Include an axum-shuttle server?", default = false}
 
 [conditional.'!ci']
@@ -56,7 +56,7 @@ ignore = ["APACHE2", "LICENSE-MIT"]
 [conditional.'!cli']
 ignore = ["src/cli.rs"]
 [conditional.'!server']
-ignore = ["Secrets.toml"]
+ignore = ["Secrets.toml", "Shuttle.toml"]
 
 # run pre/post scripts with https://rhai.rs/book/
 # [hooks]
