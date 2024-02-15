@@ -37,7 +37,7 @@ cli = {type = "bool", prompt = "Include cli tools? ", default = false}
 [conditional.'advanced'.placeholders]
 ci = {type = "bool", prompt = "Include ci?", default = true}
 # dotfiles = { type = "bool", prompt = "Include dotfiles?", default = true }
-licensing = {type = "bool", prompt = "Include licensing?", default = true}
+license = {type = "bool", prompt = "Include license?", default = true}
 itests = {type = "bool", prompt = "Include integration test harness?", default = false}
 benches = {type = "bool", prompt = "Include benchmark harness?", default = false}
 async = {type = "bool", prompt = "async?", default = false}
@@ -51,7 +51,7 @@ ignore = [".github"]
 ignore = ["tests"]
 [conditional.'!benches']
 ignore = ["benches"]
-[conditional.'!licensing']
+[conditional.'!license']
 ignore = ["APACHE2", "LICENSE-MIT"]
 [conditional.'!cli']
 ignore = ["src/cli.rs"]

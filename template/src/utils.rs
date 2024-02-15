@@ -15,7 +15,7 @@ use crate::cli::MyArgs;
 /// Set up crate logging and environment variables.
 {% if cli -%}
   pub(crate) fn setup(
-    {% if server -%} secret_store: shuttle_secrets::SecretStore {% endif -%}
+    {% if server -%} secret_store: &shuttle_secrets::SecretStore {% endif -%}
   ) -> Result<MyArgs, MyError> {
     {% if server -%} {% else %} dotenvy::dotenv().ok(); {% endif -%}
     let args = MyArgs::parse();
@@ -29,7 +29,7 @@ use crate::cli::MyArgs;
     {% endif -%}
 {% else -%}
   pub(crate) fn setup(
-    {% if server -%} secret_store: shuttle_secrets::SecretStore {% endif -%}
+    {% if server -%} secret_store: &shuttle_secrets::SecretStore {% endif -%}
       ) -> Result<(), MyError> {
     {% if server -%} {% else %} dotenvy::dotenv().ok(); {% endif -%}
     {% if async -%} 

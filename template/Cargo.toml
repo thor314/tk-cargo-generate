@@ -2,7 +2,7 @@
 authors    =["{{authors}}"]
 description="""{{description}}"""
 edition    ="2021"
-{% if licensing -%}
+{% if license -%}
 license    ="Apache2.0 OR MIT"
 {% endif -%}
 name       ="{{project-name}}"
@@ -30,7 +30,7 @@ clap = {version = "4.4.16", features = ["derive"]}
 delegate = "0.12.0" # useful for subcommand-style cli
 {% endif -%}
 {% if server -%}
-axum = "0.7.3"
+axum = { version = "0.7.3", features = ["macros"] }
 shuttle-axum = "0.39.0"
 shuttle-runtime = { version = "0.39", default-features = false }
 serde = { version = "1.0.196", features = ["derive"] }

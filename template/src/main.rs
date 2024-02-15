@@ -15,7 +15,7 @@ mod utils;
 use error::MyError;
 
 {% if server -%}
-use axum::{http::StatusCode, response::IntoResponse, routing::get, Router};
+use axum::{http::StatusCode, response::IntoResponse, routing::{get, post}, Router};
 
 async fn hello_world() -> &'static str { "Hello, world!" }
 
@@ -29,14 +29,15 @@ async fn main( #[shuttle_secrets::Secrets] secret_store: shuttle_secrets::Secret
   {% if async -%} #[tokio::main] async {% endif %} fn main() -> Result<(), MyError> {
 {% endif -%}
   {% if cli %} let _cli = {% endif %}
-  utils::setup( {% if server -%} secret_store).unwrap(); {% else %} )?; {% endif %}
+  utils::setup( {% if server -%} &secret_store).unwrap(); {% else %} )?; {% endif %}
 
   info!("hello thor"); 
 
   {% if server -%}
   let router = Router::new()
-    .route("/", axum::routing::get(hello_world))
-    .route("/-1/error", get(error_handler));
+    .route("/", get(hello_world))
+    .route("/-1/error", get(error_handler))
+    .route("/-1/health", get(|| async { StatusCode::OK }));
 
   Ok(router.into())
   {% else -%} 
