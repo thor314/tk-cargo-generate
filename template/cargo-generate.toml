@@ -14,7 +14,7 @@ cargo_generate_version = ">=0.17.4"
 ignore                 =["target", "*.swp", "*.swo"]
 
 [conditional.'crate_type == "lib"']
-ignore=["src/main.rs", ".env", "src/error.rs", "src/utils.rs", "src/cli.rs"]
+ignore=["src/main.rs", ".env", "src/error.rs", "src/utils.rs", "src/cli.rs" ]
 
 [conditional.'crate_type == "bin"']
 ignore=["src/lib.rs"]
@@ -41,12 +41,7 @@ licensing = {type = "bool", prompt = "Include licensing?", default = true}
 async = {type = "bool", prompt = "async?", default = false}
 itests = {type = "bool", prompt = "Include integration test harness?", default = false}
 benches = {type = "bool", prompt = "Include benchmark harness?", default = false}
-
-# untested as of 15 feb 2024 
-[conditional.'async'.placeholders]
 server = {type = "bool", prompt = "Include an axum-shuttle server?", default = false}
-[conditional.'!server']
-ignore = ["Secrets.toml"]
 
 [conditional.'!ci']
 ignore = [".github"]
@@ -60,6 +55,8 @@ ignore = ["benches"]
 ignore = ["APACHE2", "LICENSE-MIT"]
 [conditional.'!cli']
 ignore = ["src/cli.rs"]
+[conditional.'!server']
+ignore = ["Secrets.toml"]
 
 # run pre/post scripts with https://rhai.rs/book/
 # [hooks]

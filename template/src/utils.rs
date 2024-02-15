@@ -17,7 +17,7 @@ use crate::cli::MyArgs;
   pub(crate) fn setup(
     {% if server -%} secret_store: shuttle_secrets::SecretStore {% endif -%}
   ) -> Result<MyArgs, MyError> {
-    {% if !server -%} dotenvy::dotenv().ok(); {% endif -%}
+    {% if server -%} {% else %} dotenvy::dotenv().ok(); {% endif -%}
     let args = MyArgs::parse();
     {% if async -%}
       let filter = EnvFilter::builder()
@@ -28,8 +28,10 @@ use crate::cli::MyArgs;
       env_logger::builder().filter_level(args.log_level()).build();
     {% endif -%}
 {% else -%}
-  pub(crate) fn setup() -> Result<(), MyError> {
-    dotenvy::dotenv().ok();
+  pub(crate) fn setup(
+    {% if server -%} secret_store: shuttle_secrets::SecretStore {% endif -%}
+      ) -> Result<(), MyError> {
+    {% if server -%} {% else %} dotenvy::dotenv().ok(); {% endif -%}
     {% if async -%} 
       let filter = EnvFilter::builder()
         .with_default_directive(LevelFilter::INFO.into())

@@ -23,20 +23,20 @@ log       ="0.4"
 {% if crate_type == "bin" -%}
 thiserror="1.0"
 env_logger = "0.11"
-{% if !server %} dotenvy = "0.15" {% endif %}
+{% if server %} {% else -%} dotenvy = "0.15" {% endif %}
 {% endif -%}
 {% if cli -%}
 clap = {version = "4.4.16", features = ["derive"]}
 delegate = "0.12.0" # useful for subcommand-style cli
 {% endif -%}
-
-{% if server %}
+{% if server -%}
 axum = "0.7.3"
 shuttle-axum = "0.39.0"
 shuttle-runtime = { version = "0.39", default-features = false }
 serde = { version = "1.0.196", features = ["derive"] }
 shuttle-secrets = "0.39.0"
-{% endif %}
+{% endif -%}
+
 
 [dev-dependencies]
 rstest    ="0.18"         # testing convenience proc-macros

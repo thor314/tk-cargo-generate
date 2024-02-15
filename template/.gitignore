@@ -1,10 +1,8 @@
 ### Rust ###
 # ref: https://github.com/github/gitignore/blob/main/Rust.gitignore
-cgtb/ # ignore instatiations of my test template
-cgtl/ # ignore instatiations of my test template
+cgt* # ignore instatiations of my test template
 
 # don't leak secret env vars
-Secrets.toml # shuttle
 .env  
 
 # exclude compiled files and binaries
