@@ -21,9 +21,9 @@ dual licensed as above, without any additional terms or conditions.
 ## Project created with flags:
 - project-name: {{project-name}}
 - description:  {{description}}
-- authors:      {{authors }}
+- authors:      {{authors}}
 - crate_name:   {{crate_name}}
-- crate_type:   {{crate-type}}
+- crate_type:   {{crate_type}}
 - os-arch:      {{os-arch}}
 - username:     {{username}}
 - within_cargo: {{within_cargo_project}}
