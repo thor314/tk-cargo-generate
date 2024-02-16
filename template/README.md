@@ -18,6 +18,17 @@ for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
 dual licensed as above, without any additional terms or conditions.
 {% endif -%}
 
+{% if server -%}
+## Deploy
+```sh
+# run locally
+cargo shuttle run
+# deploy
+cargo shuttle project start # only needed the first time
+cargo shuttle deploy
+```
+{% endif -%}
+
 ## Project created with flags:
 - project-name: {{project-name}}
 - description:  {{description}}
