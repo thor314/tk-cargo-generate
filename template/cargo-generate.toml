@@ -56,7 +56,7 @@ ignore = ["APACHE2", "LICENSE-MIT"]
 [conditional.'!cli']
 ignore = ["src/cli.rs"]
 [conditional.'!server']
-ignore = ["Secrets.toml", "Shuttle.toml"]
+ignore = ["Secrets.toml", "Shuttle.toml", ".github/workflows/shuttle-deploy.yml"]
 
 # run pre/post scripts with https://rhai.rs/book/
 # [hooks]

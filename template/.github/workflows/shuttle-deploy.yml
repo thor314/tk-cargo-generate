@@ -1,0 +1,31 @@
+# https://github.com/shuttle-hq/deploy-action
+# Intentionally fail until I add my SHUTTLE_API_KEY to `Secrets.toml`
+ 
+name: Shuttle Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always # pretty colors
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # uncomment to install continuous deployment
+    # steps:
+    #   - uses: shuttle-hq/deploy-action@main
+    #     with:
+    #       deploy-key: ${{ secrets.SHUTTLE_API_KEY }} # in Secrets.toml
+          ## optional settings
+          # working-directory: "backend" # cd here before deploy
+          # name: "my-project" # change project name, also set in Shuttle.toml
+          # allow-dirty: "true" # allow uncommitted changes to be deployed
+          # no-test: "true" # don't run tests before deployment
+          # cargo-shuttle-version: "0.28.1" # require min version
+          # secrets: |
+          #   MY_AWESOME_SECRET_1 = '${{ secrets.SECRET_1 }}'
+          #   MY_AWESOME_SECRET_2 = '${{ secrets.SECRET_2 }}'
