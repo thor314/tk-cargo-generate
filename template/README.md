@@ -6,13 +6,6 @@
 <!-- [![Documentation](https://docs.rs/{{project-name}}/badge.svg)](https://docs.rs/{{project-name}}) -->
 {% endif -%}
 
-{% if crate_type == "bin" -%}
-## Installation
-### Cargo
-- Install the rust toolchain in order to have cargo installed by following [this](https://www.rust-lang.org/tools/install) guide.
-- run `cargo install {{project-name}}`
-{% endif -%}
-
 {% if license -%}
 ## License
 Licensed under your option of either:
@@ -24,3 +17,23 @@ Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
 dual licensed as above, without any additional terms or conditions.
 {% endif -%}
+
+## Project created with flags:
+- project-name: {{project-name}}
+- description:  {{description}}
+- authors:      {{authors }}
+- crate_name:   {{crate_name}}
+- crate_type:   {{crate-type}}
+- os-arch:      {{os-arch}}
+- username:     {{username}}
+- within_cargo: {{within_cargo_project}}
+- is_init:      {{is_init}}
+- now:          {{ "now" }}
+- bin or lib:   {% if crate_type == "bin" %} bin {% else %} lib {% endif %}
+- cli:          {% if cli %} cli {% endif %}
+- license:      {% if licencse %} license {% endif %}
+- ci:           {% if licencse %} ci {% endif %}
+- itests:       {% if itests %} itests {% endif %}
+- benches:      {% if benches %} benches {% endif %}
+- async:        {% if async %} async {% endif %}
+- server:       {% if server %} server {% endif %}
