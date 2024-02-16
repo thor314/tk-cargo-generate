@@ -29,12 +29,12 @@ dual licensed as above, without any additional terms or conditions.
 - within_cargo: {{within_cargo_project}}
 - is_init:      {{is_init}}
 - now:          {{ "now" | date }}
-- bin or lib:   {% if crate_type == "bin" %}bin {% else %}lib {% endif %}
-- advanced:     {% if advanced %}advanced {% endif %}
-- cli:          {% if cli %}cli {% endif %}
-- license:      {% if license %}license {% endif %}
-- ci:           {% if ci %}ci {% endif %}
-- itests:       {% if itests %}itests {% endif %}
-- benches:      {% if benches %}benches {% endif %}
-- async:        {% if async %}async {% endif %}
-- server:       {% if server %}server {% endif %}
+- bin or lib:  {% if crate_type == "bin" %} bin {% else %} lib {% endif %}
+- advanced:    {% if advanced %}a dvanced {% endif %}
+- cli:         {% if cli %} cli {% endif %}
+- license:     {% if license %} license {% endif %}
+- ci:          {% if ci %} ci {% endif %}
+- itests:      {% if itests %} itests {% endif %}
+- benches:     {% if benches %} benches {% endif %}
+- async:       {% if async %} async {% endif %}
+- server:      {% if server %} server {% endif %}
