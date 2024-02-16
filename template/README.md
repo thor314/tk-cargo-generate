@@ -28,9 +28,9 @@ dual licensed as above, without any additional terms or conditions.
 - username:     {{username}}
 - within_cargo: {{within_cargo_project}}
 - is_init:      {{is_init}}
-- now:          {{ "now" | date }}
+- now:          {{ "now" | date: "%Y-%m-%d" }}
 - bin or lib:  {% if crate_type == "bin" %} bin {% else %} lib {% endif %}
-- advanced:    {% if advanced %}a dvanced {% endif %}
+- advanced:    {% if advanced %} advanced {% endif %}
 - cli:         {% if cli %} cli {% endif %}
 - license:     {% if license %} license {% endif %}
 - ci:          {% if ci %} ci {% endif %}
