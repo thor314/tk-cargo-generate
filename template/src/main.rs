@@ -15,6 +15,10 @@ mod utils;
 use error::MyError;
 
 {% if server -%}
+// use diesel_async::{
+//   pooled_connection::deadpool::Pool,
+//   AsyncPgConnection,
+// };
 use axum::{http::StatusCode, response::IntoResponse, routing::{get, post}, Router};
 
 async fn hello_world() -> &'static str { "Hello, world!" }
@@ -24,7 +28,9 @@ async fn error_handler() -> impl IntoResponse {
 }
 
 #[shuttle_runtime::main]
-async fn main( #[shuttle_secrets::Secrets] secret_store: shuttle_secrets::SecretStore,) -> shuttle_axum::ShuttleAxum {
+async fn main( #[shuttle_secrets::Secrets] secret_store: shuttle_secrets::SecretStore,
+    // #[shuttle_diesel_async::Postgres] pg: Pool<AsyncPgConnection>
+) -> shuttle_axum::ShuttleAxum {
 {% else -%}
   {% if async -%} #[tokio::main] async {% endif %} fn main() -> Result<(), MyError> {
 {% endif -%}

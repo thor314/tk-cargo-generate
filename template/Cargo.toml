@@ -41,6 +41,9 @@ serde_json = "1.0.113"
 # tower-http = { version = "0.5.1", features = ["fs"] }
 # shuttle-shared-db = { version = "0.39.0", features = ["postgres", "sqlx"] } 
 # sqlx = { version = "0.7.3", features = ["postgres"] }
+# diesel = { version = "2.1.4", features = ["postgres"] }
+# shuttle-diesel-async = { git = "https://github.com/aumetra/shuttle-diesel-async", version = "0.1.0" }
+# diesel-async = { version = "0.4.1", features = ["postgres"] }
 {% endif %}
 
 [dev-dependencies]
