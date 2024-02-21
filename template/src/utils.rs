@@ -42,7 +42,7 @@ use crate::cli::MyArgs;
     {% endif -%}
 {% endif -%}
 
-  {% if server -%} secret_store.get("DOTENV_OK").unwrap(); {% else -%} 
+  {% if server -%} secret_store.get("DOTENV_OK").context("failed to get secrets")?; {% else -%} 
   std::env::var("DOTENV_OK").with_context(|| anyhow!("failed to load dotenv"))?; {% endif -%}
 
   {% if cli %} Ok(args) {% else %} Ok(()) {% endif %}
