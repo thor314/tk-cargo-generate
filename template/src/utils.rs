@@ -8,17 +8,16 @@ use log::trace;
 use crate::error::MyError;
 {% if cli -%}
 use clap::Parser;
-use crate::cli::MyArgs;
-// use crate::{cli::subcommand::SubcommandArgs as MyArgs, error::MyError};
+use crate::cli::MyCli;
 {% endif -%}
 
 /// Set up crate logging and environment variables.
 {% if cli -%}
   pub(crate) fn setup(
     {% if server -%} secret_store: &shuttle_secrets::SecretStore {% endif -%}
-  ) -> Result<MyArgs, MyError> {
+  ) -> Result<MyCli, MyError> {
     {% if server -%} {% else %} dotenvy::dotenv().ok(); {% endif -%}
-    let args = MyArgs::parse();
+    let args = MyCli::parse();
     {% if async -%}
       let filter = EnvFilter::builder()
         .with_default_directive(args.log_level().into())

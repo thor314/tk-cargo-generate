@@ -1,27 +1,38 @@
 //! https://docs.rs/clap/latest/clap/
 
-use clap::{ArgAction, Args, Parser};
+use clap::{ArgAction, Args, Parser, Subcommand};
 {% if async -%}
-use tracing::{debug, trace};
+use tracing::trace;
 use tracing_subscriber::filter::{LevelFilter, EnvFilter};
 {% else -%}
-use log::{debug, trace, LevelFilter};
+use log::{trace, LevelFilter};
 {% endif -%}
 
+/// The subcommand handler.
+/// If no subcommand is provided, the handler will short to the logic for the default command.
+///
+/// This struct probably doesn't need to change, make changes to `Subcommands` and the individual
+/// subcommands instead.
 #[derive(Parser, Debug)]
 #[command(name = "{{crate_name}}")]
 #[command(bin_name = "{{crate_name}}")]
 #[clap(about = "{{crate_name}} cli")]
-#[command(author, version, long_about = None)]
-pub struct MyArgs {
+#[command(author, version)]
+#[command(propagate_version = true)]
+pub struct MyCli {
+  #[command(subcommand)]
+  subcommands:   Option<Subcommands>,
   /// Set the verbosity. Use -v for DEBUG, -vv for TRACE. None for INFO.
   #[arg(long = "verbose", short = 'v', action = ArgAction::Count)]
   pub verbosity: u8,
 }
 
-impl MyArgs {
+impl MyCli {
   pub fn handle(&self) {
-    trace!("handling MyArgs");
+    match &self.subcommands {
+      Some(subcommands) => subcommands.handle(),
+      None => self.handle_default(),
+    }
   }
 
   /// in decreasing order of priority:
@@ -40,35 +51,45 @@ impl MyArgs {
       {% if async %} LevelFilter::INFO {% else %} LevelFilter::Info {% endif %}
     }
   }
+
+  /// The default command: what to do if no subcommand is provided 
+  fn handle_default(&self) { trace!("handle default") }
 }
 
-// option to use subcommand args
-pub(crate) mod subcommand {
-  use super::*;
+/// CLI parser with subcommands
+/// The subcommands for this CLI.
+/// Add subcommands as demonstrated.
+#[derive(Debug, Subcommand)]
+enum Subcommands {
+  SayHello(SayHello),
+}
 
-  /// CLI parser with subcommands
-  #[derive(Parser, Debug)]
-  #[command(name = "{{crate_name}}")]
-  #[command(bin_name = "{{crate_name}}")]
-  #[clap(about = "{{crate_name}} cli")]
-  pub enum SubcommandArgs {
-    First(MyArgs),
-  }
-
-  impl SubcommandArgs {
-    delegate::delegate! {
-      to match self {
-        SubcommandArgs::First(subcommand) => subcommand,
-      } {
-        pub fn log_level(&self) -> LevelFilter;
-      }
-    }
-
-    pub fn handle(&self) {
-      trace!("handling subcommands...");
-      match self {
-        SubcommandArgs::First(c) => c.handle(),
-      }
+//
+impl Subcommands {
+  /// delegate handling to each subcommand
+  pub fn handle(&self) {
+    trace!("handling subcommands...");
+    match self {
+      Subcommands::SayHello(c) => c.handle(),
     }
   }
 }
+
+// test with: 
+// cargo run -- say-hello --hello
+/// An example subcommand
+#[derive(Parser, Debug)]
+struct SayHello {
+  /// example
+  #[arg(long = "hello")]
+  pub hello_world: bool,
+}
+
+impl SayHello {
+  pub fn handle(&self) {
+    if self.hello_world {
+      println!("hello world!");
+    }
+  }
+}
+
