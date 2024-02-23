@@ -25,7 +25,7 @@ use crate::cli::MyArgs;
         .from_env_lossy();
       tracing_subscriber::fmt().with_env_filter(filter).init();
     {% else -%}
-      env_logger::builder().filter_level(args.log_level()).build();
+      env_logger::builder().filter_level(args.log_level()).init();
     {% endif -%}
 {% else -%}
   pub(crate) fn setup(
