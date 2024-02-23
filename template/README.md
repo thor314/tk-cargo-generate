@@ -1,10 +1,25 @@
-# {{project-name}}
-![](https://img.shields.io/badge/made_by_cryptograthor-black?style=flat&logo=undertale&logoColor=hotpink)
-{% if ci -%}
-![](https://github.com/thor314/{{project-name}}/actions/workflows/ci.yml/badge.svg)
-<!-- [![crates.io](https://img.shields.io/crates/v/{{project-name}}.svg)](https://crates.io/crates/{{project-name}}) -->
-<!-- [![Documentation](https://docs.rs/{{project-name}}/badge.svg)](https://docs.rs/{{project-name}}) -->
-{% endif -%}
+<h1 align="center">
+  {{project-name}}
+</h1>
+
+<p align="center">
+  {{description}}
+</p>
+
+<div align="center">
+  <a href="https://x.com/cryptograthor">
+    <img src="https://img.shields.io/badge/made_by_cryptograthor-black?style=flat&logo=undertale&logoColor=hotpink" />
+    <!-- ![](https://img.shields.io/badge/made_by_cryptograthor-black?style=flat&logo=undertale&logoColor=hotpink) -->
+  </a>
+  {% if ci -%}
+  <a href="https://github.com/thor314/{{project-name}}/actions">
+    <!-- ![](https://github.com/thor314/{{project-name}}/actions/workflows/ci.yml/badge.svg) -->
+    <img src="https://github.com/thor314/{{project-name}}/actions/workflows/ci.yml/badge.svg" />
+  </a>
+  <!-- [![crates.io](https://img.shields.io/crates/v/{{project-name}}.svg)](https://crates.io/crates/{{project-name}}) -->
+  <!-- [![Documentation](https://docs.rs/{{project-name}}/badge.svg)](https://docs.rs/{{project-name}}) -->
+  {% endif -%}
+</div>
 
 {% if license -%}
 ## License
