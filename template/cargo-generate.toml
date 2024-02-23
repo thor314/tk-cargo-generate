@@ -29,11 +29,14 @@ type = "bool"
 prompt = "Advanced configuration? "
 default = false
 [conditional.'!advanced']
-ignore = ["tests", "benches", "APACHE2", "LICENSE-MIT"]
+ignore = ["tests", "benches", "APACHE2", "LICENSE-MIT", "Shuttle.toml", "Secrets.toml", ".github/workflows/shuttle-deploy.yml"]
 
 [conditional.'crate_type == "bin"'.placeholders] 
 cli = {type = "bool", prompt = "Include cli tools? ", default = false}
 
+# note: as far as I can tell, advanced is a blessed word 
+# don't try to do this with other keywords
+# whatever you think will work, you will instead just waste a half hour and be sad
 [conditional.'advanced'.placeholders]
 ci = {type = "bool", prompt = "Include ci?", default = true}
 # dotfiles = { type = "bool", prompt = "Include dotfiles?", default = true }
