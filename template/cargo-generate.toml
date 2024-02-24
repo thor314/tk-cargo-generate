@@ -14,7 +14,7 @@ cargo_generate_version = ">=0.17.4"
 ignore                 =["target", "*.swp", "*.swo"]
 
 [conditional.'crate_type == "lib"']
-ignore=["src/main.rs", ".env", "src/error.rs", "src/utils.rs", "src/cli.rs" ]
+ignore=["src/main.rs", ".env", "src/error.rs", "src/utils.rs", "src/cli.rs", "newcommand.fish" ]
 
 [conditional.'crate_type == "bin"']
 ignore=["src/lib.rs"]
@@ -33,6 +33,8 @@ ignore = ["tests", "benches", "APACHE2", "LICENSE-MIT", "Shuttle.toml", "Secrets
 
 [conditional.'crate_type == "bin"'.placeholders] 
 cli = {type = "bool", prompt = "Include cli tools? ", default = false}
+[conditional.'!cli'.placeholders] 
+ignore=["newcommand.fish", "src/cli.rs"]
 
 # note: as far as I can tell, advanced is a blessed word 
 # don't try to do this with other keywords
