@@ -14,9 +14,9 @@ use log::{trace, LevelFilter};
 /// This struct probably doesn't need to change, make changes to `Subcommands` and the individual
 /// subcommands instead.
 #[derive(Parser, Debug)]
-#[command(name = "{{crate_name}}")]
-#[command(bin_name = "{{crate_name}}")]
-#[clap(about = "{{crate_name}} cli")]
+#[command(name = "{{project-name}}")]
+#[command(bin_name = "{{project-name}}")]
+#[clap(about = "{{project-name}} cli")]
 #[command(author, version)]
 #[command(propagate_version = true)]
 pub struct MyCli {
@@ -81,6 +81,10 @@ impl Subcommands {
 #[derive(Parser, Debug)]
 struct SayHello {
   /// example
+  // note ValueHint + Parser for basic suggestion parsing 
+  // https://github.com/clap-rs/clap/blob/master/clap_complete/examples/completion-derive.rs#L38
+  // https://docs.rs/clap/latest/clap/enum.ValueHint.html ; eg:
+  // https://docs.rs/clap/latest/clap/macro.value_parser.html
   #[arg(long = "hello")]
   pub hello_world: bool,
 }
