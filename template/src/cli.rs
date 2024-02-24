@@ -1,6 +1,6 @@
 //! https://docs.rs/clap/latest/clap/
 
-use clap::{ArgAction, Args, Parser, Subcommand};
+use clap::{ArgAction, Args, CommandFactory, Parser, Subcommand};
 {% if async -%}
 use tracing::trace;
 use tracing_subscriber::filter::{LevelFilter, EnvFilter};
@@ -25,13 +25,26 @@ pub struct MyCli {
   /// Set the verbosity. Use -v for DEBUG, -vv for TRACE. None for INFO.
   #[arg(long = "verbose", short = 'v', action = ArgAction::Count)]
   pub verbosity: u8,
+  /// Generate shell completions, using doc strings for subcommand hints
+  #[arg(short = 'g', long = "generate", value_enum)]
+  generator:     Option<clap_complete::Shell>,
 }
 
 impl MyCli {
   pub fn handle(&self) {
+    if let Some(generator) = self.generator {
+      let mut cmd = Self::command();
+      eprintln!("Generating completion file for {generator:?}...");
+      print_completions(generator, &mut cmd);
+    }
+
     match &self.subcommands {
       Some(subcommands) => subcommands.handle(),
       None => self.handle_default(),
+    }
+
+    fn print_completions<G: clap_complete::Generator>(gen: G, cmd: &mut clap::Command) {
+      clap_complete::generate(gen, cmd, cmd.get_name().to_string(), &mut std::io::stdout());
     }
   }
 
@@ -64,7 +77,6 @@ enum Subcommands {
   SayHello(SayHello),
 }
 
-//
 impl Subcommands {
   /// delegate handling to each subcommand
   pub fn handle(&self) {
