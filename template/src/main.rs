@@ -8,7 +8,7 @@
 mod error;
 #[cfg(test)] mod tests;
 mod utils;
-{% if cli %} mod cli; {% endif %}
+{% if my_cli %} mod my_cli; {% endif %}
 {% if async -%} use tracing::info;
 {% else -%} use log::info;
 {% endif %}
@@ -34,9 +34,9 @@ async fn main( #[shuttle_secrets::Secrets] secret_store: shuttle_secrets::Secret
 {% else -%}
   {% if async -%} #[tokio::main] async {% endif %} fn main() -> Result<(), MyError> {
 {% endif -%}
-  {% if cli %} let cli = {% endif %}
+  {% if my_cli %} let my_cli = {% endif %}
   utils::setup( {% if server -%} &secret_store).unwrap(); {% else %} )?; {% endif %}
-  {% if cli -%} cli.handle(); {% endif %}
+  {% if my_cli -%} my_cli.handle(); {% endif %}
 
   info!("hello thor"); 
 
