@@ -16,7 +16,7 @@ use log::{trace, LevelFilter};
 #[derive(Parser, Debug)]
 #[command(name = "{{project-name}}")]
 #[command(bin_name = "{{project-name}}")]
-#[clap(about = "{{project-name}} cli")]
+#[clap(about = "{{description}}")]
 #[command(author, version)]
 #[command(propagate_version = true)]
 pub struct MyCli {
