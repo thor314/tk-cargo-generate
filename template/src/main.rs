@@ -34,8 +34,9 @@ async fn main( #[shuttle_secrets::Secrets] secret_store: shuttle_secrets::Secret
 {% else -%}
   {% if async -%} #[tokio::main] async {% endif %} fn main() -> Result<(), MyError> {
 {% endif -%}
-  {% if cli %} let _cli = {% endif %}
+  {% if cli %} let cli = {% endif %}
   utils::setup( {% if server -%} &secret_store).unwrap(); {% else %} )?; {% endif %}
+  {% if cli -%} cli.handle(); {% endif %}
 
   info!("hello thor"); 
 
