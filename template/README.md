@@ -44,7 +44,8 @@ cargo shuttle deploy
 ```
 {% endif -%}
 
-## Project created with flags:
+## Template flags
+This project was generated with [Thor's cargo generate template](https://github.com/thor314/tk-cargo-generate/) with features:
 - project-name: {{project-name}}
 - description:  {{description}}
 - authors:      {{authors}}
