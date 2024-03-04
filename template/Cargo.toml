@@ -59,10 +59,6 @@ criterion ="0.5"
 arbitrary         ={ version = "1.1", features = ["derive"] } # see quickcheck
 quickcheck        ="1.0"      # lowkey proptest suite
 quickcheck_macros ="1" # derive 
-
-[[test]]
-name = "integration"
-path = "tests/tests.rs"
 {% endif -%}
 
 {% if benches -%}

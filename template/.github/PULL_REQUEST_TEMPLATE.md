@@ -3,10 +3,6 @@ Thank you for contributing! Please fill out the template below, and remove or ad
 information as you feel neccesary.
 --->
 
-This Pull Request fixes/closes #{issue_num}.
+This PR fixes/closes issue #N
 
 It changes the following:
-- `$WHAT_YOU_DID`
-
-I solumnly swear that I included unit tests:
-- [ ] yes sir/ma'am/anon
