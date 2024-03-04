@@ -1,16 +1,49 @@
 # Auto-update dependencies. 
-# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/about-dependabot-version-updates
+# last updated 2024-03-04
 
-version: 2
+name: Dependabot auto-merge
+on: pull_request
 
-updates:
-  - package-ecosystem: cargo
-    directory: "/"
-    schedule:
-      interval: "daily" # daily, weekly, or monthly 
-    open-pull-requests-limit: 10
-    # ignore:
-    # - dependency-name: example-crate
-    #   versions:
-    #   - 0.1.0
+permissions:
+  pull-requests: write # required for approval and merging
+  contents: write # required for merging
 
+# auto-merge dependabot PRs 
+# https://docs.github.com/en/code-security/dependabot/working-with-dependabot/automating-dependabot-with-github-actions#enable-auto-merge-on-a-pull-request
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Enable auto-merge for Dependabot PRs
+        # if: contains(steps.metadata.outputs.dependency-names, 'my-dependency') && steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+# Approve but do not merge:
+# https://docs.github.com/en/code-security/dependabot/working-with-dependabot/automating-dependabot-with-github-actions#approve-a-pull-request
+# name: Dependabot auto-merge
+# on: pull_request
+# jobs:
+#   dependabot:
+#     runs-on: ubuntu-latest
+#     if: github.actor == 'dependabot[bot]'
+#     steps:
+#       - name: Dependabot metadata
+#         id: metadata
+#         uses: dependabot/fetch-metadata@v1
+#         with:
+#           github-token: "${{ secrets.GITHUB_TOKEN }}"
+#       - name: Approve a PR
+#         run: gh pr review --approve "$PR_URL"
+#         env:
+#           PR_URL: ${{github.event.pull_request.html_url}}
+#           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
