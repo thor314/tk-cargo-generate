@@ -9,7 +9,7 @@
 mod error;
 #[cfg(test)] mod tests;
 mod utils;
-{% if my_cli %} mod my_cli; {% endif %}
+{% if cli %} mod cli; {% endif %}
 {% if async -%} use tracing::info;
 {% else -%} use log::info;
 {% endif %}

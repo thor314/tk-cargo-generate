@@ -8,10 +8,10 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
   # look for updates to Cargo.toml dependencies every week
   # docs: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#package-ecosystem
   - package-ecosystem: cargo
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"

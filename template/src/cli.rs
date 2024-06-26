@@ -31,21 +31,25 @@ pub struct MyCli {
 }
 
 impl MyCli {
+  /// handle subcommands and flags for {{project-name}}
   pub fn handle(&self) {
+    // handle non-subcommand flags
     if let Some(generator) = self.generator {
       let mut cmd = Self::command();
       eprintln!("Generating completion file for {generator:?}...");
       print_completions(generator, &mut cmd);
     }
 
+    // handle subcommands
     match &self.subcommands {
       Some(subcommands) => subcommands.handle(),
       None => self.handle_default(),
     }
+  }
 
-    fn print_completions<G: clap_complete::Generator>(gen: G, cmd: &mut clap::Command) {
-      clap_complete::generate(gen, cmd, cmd.get_name().to_string(), &mut std::io::stdout());
-    }
+  /// generate completions for {{project-name}}
+  fn print_completions<G: clap_complete::Generator>(gen: G, cmd: &mut clap::Command) {
+    clap_complete::generate(gen, cmd, cmd.get_name().to_string(), &mut std::io::stdout());
   }
 
   /// in decreasing order of priority:
