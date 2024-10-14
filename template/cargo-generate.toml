@@ -62,8 +62,8 @@ ignore = ["APACHE2", "LICENSE-MIT"]
 ignore = ["Secrets.toml", "Shuttle.toml", ".github/workflows/shuttle-deploy.yml"]
 
 # run pre/post scripts with https://rhai.rs/book/
-[hooks]
-init = ["init.rhai"]  # run before template replacement
+# [hooks]
+# init = ["init.rhai"]  # run before template replacement
 # pre = ["pre-script.rhai"]
 # post = [...]
 # hub create and push
