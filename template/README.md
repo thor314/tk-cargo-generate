@@ -44,24 +44,23 @@ cargo shuttle deploy
 ```
 {% endif -%}
 
-## Template flags
-This project was generated with [Thor's cargo generate template](https://github.com/thor314/tk-cargo-generate/) with features:
-- project-name: {{project-name}}
-- description:  {{description}}
-- authors:      {{authors}}
-- crate_name:   {{crate_name}}
-- crate_type:   {{crate_type}}
-- os-arch:      {{os-arch}}
-- username:     {{username}}
-- within_cargo: {{within_cargo_project}}
-- is_init:      {{is_init}}
-- now:          {{ "now" | date: "%Y-%m-%d" }}
-- bin or lib:  {% if crate_type == "bin" %} bin {% else %} lib {% endif %}
-- advanced:    {% if advanced %} advanced {% endif %}
-- cli:         {% if cli %} cli {% endif %}
-- license:     {% if license %} license {% endif %}
-- ci:          {% if ci %} ci {% endif %}
-- itests:      {% if itests %} itests {% endif %}
-- benches:     {% if benches %} benches {% endif %}
-- async:       {% if async %} async {% endif %}
-- server:      {% if server %} server {% endif %}
+<!-- This project was generated with [Thor's cargo generate template](https://github.com/thor314/tk-cargo-generate/) with features: -->
+<!-- - project-name: {{project-name}} -->
+<!-- - description:  {{description}} -->
+<!-- - authors:      {{authors}} -->
+<!-- - crate_name:   {{crate_name}} -->
+<!-- - crate_type:   {{crate_type}} -->
+<!-- - os-arch:      {{os-arch}} -->
+<!-- - username:     {{username}} -->
+<!-- - within_cargo: {{within_cargo_project}} -->
+<!-- - is_init:      {{is_init}} -->
+<!-- - now:          {{ "now" | date: "%Y-%m-%d" }} -->
+<!-- - bin or lib:  {% if crate_type == "bin" %} bin {% else %} lib {% endif %} -->
+<!-- - advanced:    {% if advanced %} advanced {% endif %} -->
+<!-- - cli:         {% if cli %} cli {% endif %} -->
+<!-- - license:     {% if license %} license {% endif %} -->
+<!-- - ci:          {% if ci %} ci {% endif %} -->
+<!-- - itests:      {% if itests %} itests {% endif %} -->
+<!-- - benches:     {% if benches %} benches {% endif %} -->
+<!-- - async:       {% if async %} async {% endif %} -->
+<!-- - server:      {% if server %} server {% endif %} -->
