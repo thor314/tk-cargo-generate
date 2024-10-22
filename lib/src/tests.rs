@@ -22,3 +22,8 @@ fn test_wb(wb: Wb) {
     log::info!("wb: {wb:?}");
     let Wb { count } = wb;
 }
+
+#[test]
+fn testy(){
+    assert_eq!(1+1, 2, "it works!");
+}
